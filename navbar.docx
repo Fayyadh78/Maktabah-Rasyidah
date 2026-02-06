@@ -1,0 +1,25 @@
+kamu buka folder navbar dan ada namanya navbar.html
+  kamu buka aja navbar.html
+  
+  a href="javascript:void(0)" class="nav-link-module"><i class="fas fa-newspaper"></i> Artikel</a> (ganti nama di navigasi bar atas)
+  <div class="dropdown-menu-module">
+                        <a href="/navbar/artikel/artikel-umum/artikel-umum.html" class="dropdown-item-module">Artikel Umum</a> (kalau kamu mau ganti dengan nama, dan perhatikan lokasi dimana artikel itu. semunay pasti html, seumpama ini, kan nama htmlnya artikel-umum.html nah lokasinya ada di navbar masuk di artikel, masuk di artikel-umum(contoh), masuk artikel-umum.html(contoh)
+                        <a href="/navbar/artikel/artikel-bahasa/artikel-bahasa.html" class="dropdown-item-module">Artikel Bahasa</a> (kalau kamu mau ganti dengan nama, dan perhatikan lokasi dimana artikel itu. semunay pasti html, seumpama ini, kan nama htmlnya artikel-umum.html nah lokasinya ada di navbar masuk di artikel, masuk di artikel-umum(contoh), masuk artikel-umum.html(contoh)
+                        <a href="/navbar/artikel/artikel-pendidikan/artikel-pendidikan.html" class="dropdown-item-module">Artikel Pendidikan</a> (kalau kamu mau ganti dengan nama, dan perhatikan lokasi dimana artikel itu. semunay pasti html, seumpama ini, kan nama htmlnya artikel-umum.html nah lokasinya ada di navbar masuk di artikel, masuk di artikel-umum(contoh), masuk artikel-umum.html(contoh)
+                        <a href="/navbar/artikel/artikel-sosial/artikel-sosial.html" class="dropdown-item-module">Artikel Sosial Humaniora</a> (kalau kamu mau ganti dengan nama, dan perhatikan lokasi dimana artikel itu. semunay pasti html, seumpama ini, kan nama htmlnya artikel-umum.html nah lokasinya ada di navbar masuk di artikel, masuk di artikel-umum(contoh), masuk artikel-umum.html(contoh)
+                        <a href="/navbar/artikel/artikel-agama/artikel-agama.html" class="dropdown-item-module">Artikel Agama</a> (kalau kamu mau ganti dengan nama, dan perhatikan lokasi dimana artikel itu. semunay pasti html, seumpama ini, kan nama htmlnya artikel-umum.html nah lokasinya ada di navbar masuk di artikel, masuk di artikel-umum(contoh), masuk artikel-umum.html(contoh)
+                        <a href="/navbar/artikel/artikel-internasional/artikel-internasional.html" class="dropdown-item-module">Artikel Internasional</a> (kalau kamu mau ganti dengan nama, dan perhatikan lokasi dimana artikel itu. semunay pasti html, seumpama ini, kan nama htmlnya artikel-umum.html nah lokasinya ada di navbar masuk di artikel, masuk di artikel-umum(contoh), masuk artikel-umum.html(contoh)
+                    </div>
+
+                                                                                                                                                          
+  kalau kamu nambah, tinggal copas aja dan ganti ganti aja.
+                                                                                                                                                           
+
+                                                                                                                                                           
+                                                                                                                                                           
+                                                                                                                                                           
+                                                                                                                                                           
+                                                                                                                                                           
+                                                                                                                                                           
+                                                                                                                                                           
+                                                                                                                                                           
