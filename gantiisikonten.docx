@@ -1,0 +1,36 @@
+1. buka salah satu html yang mau di ganti (ini katakanlah artikel-umum.html). perhatikan karena ini berkesinambungan
+
+
+
+<div class="filter-tags">
+                <button class="filter-tag active" data-filter="all">Semua</button>
+                <button class="filter-tag" data-filter="kategori1">kategori 1</button> (yang "kategori1" itu otak, sedangkan yang "kategori 1 itu muka" kamu harus sesuaikan agar otak itu berjlan
+                <button class="filter-tag" data-filter="kategori2">kategori 2</button>
+                <button class="filter-tag" data-filter="kategori3">kategori 3</button>
+                <button class="filter-tag" data-filter="kategori4">kategori 4</button>
+                <button class="filter-tag" data-filter="kategori5">kategori 5</button>
+                <button class="filter-tag" data-filter="kategori6">kategori 6</button>
+            </div>
+
+
+  "categories": {
+     (ini otak)   "kategori1": "kategori 1", (ini muka) *kamu bisa ganti kok dengan seumpama otaknya "Pendidikan" dan mukanya "Pendidikan" itu bisa
+     (ini otak)   "kategori2": "kategori 2", (ini muka)
+     (ini otak)   "kategori3": "kategori 3", (ini muka)
+     (ini otak)   "kategori4": "kategori 4", (ini muka)
+     (ini otak)   "kategori5": "kategori 5", (ini muka)
+     (ini otak)   "kategori6": "kategori 6" (ini muka)
+    },
+
+  "id": 1, (ini seperti ke, artinya "id": 1 sama saja dengan "ini yang ke: 1". karena ini "id": 1, maka id selanjutnya "id": 2
+            "title": "cara beli laptop", (masukkan judul)
+            "author": "zumar", (nama penulis)
+            "year": 2026, (tahun terbit)
+            "category": "kategori4", (masukkan otaknya)
+            "description": "comingsoon",ganti "comingsoon" dengan deskripsi karya
+            "pages": 32, (masukkan jumlah halaman)
+            "size": "4.7 MB", (masukkan besar ukuran file"
+            "icon": "fas fa-pencil-alt", (ini icon, kamu bisa ganti, kalau kamu ga tau kamu bisa tanya ke ai dengan perintah "kalau fas fa-pencil-alt adalah pensil, kalau kelinci apa?" (hanya contoh) ini bukan hanya merubah dari bahasa indo ke inggris aja lhoyadg. para programer di luar sana sudah membuat kodenya sendiri. kalau bahasa inggrisnya pensil kan pencil, nyatanya tadi fas fa-pencil-alt bukan fas fa-pencil aja
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing", (masukkan url file karya yang sudah share for anyone)
+            "downloadCount": 0
+            },
