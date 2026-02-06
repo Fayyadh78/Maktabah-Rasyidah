@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maktabah Rasyidah</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/navbar/cerita/cerita-dunia/style.css">
+</head>
+<body>
+    <!-- NAVBAR AKAN DIMUAT MELALUI FETCH -->
+    <div id="navbar-container"></div>
+
+    <header class="health-header">
+        <div class="breadcrumb">
+            <div class="breadcrumb-links">
+                <a href="/" class="breadcrumb-link">Beranda</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="#" class="breadcrumb-link">Cerita</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">Dunia</span>
+            </div>
+        </div>
+        
+        <h1 class="page-title">Cerita Dunia</h1>
+        <p class="page-subtitle">Jelajahi berbagai wawasan menarik mulai dari bahasa, sejarah, hingga tips hidup dalam satu tempat. Kami menyajikan informasi teraktual dan terpercaya yang dirancang untuk memperluas cakrawala pengetahuan Anda setiap hari. Temukan jawaban atas pertanyaan harian Anda di sini.</p>
+        
+        <div class="health-stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalArticles">0</div>
+                <div class="stat-label">Artikel Tersedia</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalAuthors">0</div>
+                <div class="stat-label">Penulis Ahli</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalPages">0</div>
+                <div class="stat-label">Total Halaman</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalDownloads">0</div>
+                <div class="stat-label">Total Download</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="articles-container">
+        <section class="filter-section">
+            <div class="filter-header">
+                <h2 class="filter-title"><i class="fas fa-filter"></i> Filter Kategori Cerita Dunia</h2>
+                <div class="filter-count">20 Artikel</div>
+            </div>
+            <div class="filter-tags">
+                <button class="filter-tag active" data-filter="all">Semua</button>
+                <button class="filter-tag" data-filter="kategori1">kategori 1</button>
+                <button class="filter-tag" data-filter="kategori2">kategori 2</button>
+                <button class="filter-tag" data-filter="kategori3">kategori 3</button>
+                <button class="filter-tag" data-filter="kategori4">kategori 4</button>
+                <button class="filter-tag" data-filter="kategori5">kategori 5</button>
+                <button class="filter-tag" data-filter="kategori6">kategori 6</button>
+            </div>
+        </section>
+
+        <section class="articles-grid" id="articlesGrid">
+            <!-- Artikel akan dimuat secara dinamis dari JavaScript -->
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="footer-logo">Maktabah Rasyidah</div>
+                <p class="footer-description">Perpustakaan digital dengan nuansa klasik yang menyajikan koleksi pengetahuan untuk hidup yang lebih sehat.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Kategori Cerita Dunia</h3>
+                <ul class="footer-links">
+                    <li><a href="#" data-filter="kategori1">kategori 1</a></li>
+                    <li><a href="#" data-filter="kategori2">kategori 2</a></li>
+                    <li><a href="#" data-filter="kategori3">kategori 3</a></li>
+                    <li><a href="#" data-filter="kategori4">kategori 4</a></li>
+                    <li><a href="#" data-filter="kategori5">kategori 5</a></li>
+                    <li><a href="#" data-filter="kategori6">kategori 6</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Bantuan</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Pusat Bantuan</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Kontak Kami</a></li>
+                    <li><a href="#">Kebijakan Privasi</a></li>
+                    <li><a href="#">Syarat Layanan</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Maktabah Rasyidah. Hak cipta dilindungi.<br>Copyright © 2026 Fairuz Zumar/Makna Desain. Seluruh Hak Cipta Dilindungi.</p>
+            <div class="footer-bottom-links">
+            </div>
+        </div>
+    </footer>
+
+    <!-- Konfigurasi Artikel (Dapat Diedit di HTML) -->
+    <script type="application/json" id="articles-config">
+    {
+    "articles": [
+        {
+            "id": 1,
+            "title": "comingsoon1",
+            "author": "Ahmad Zaky",
+            "year": 2026,
+            "category": "kategori4",
+            "description": "comingsoon",
+            "pages": 32,
+            "size": "4.7 MB",
+            "icon": "fas fa-pencil-alt",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 2,
+            "title": "comingsoon2",
+            "author": "Sarah Dewi",
+            "year": 2024,
+            "category": "kategori6",
+            "description": "comingsoon",
+            "pages": 56,
+            "size": "8.1 MB",
+            "icon": "fas fa-ruler",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 3,
+            "title": "comingsoon3",
+            "author": "Budi Santoso",
+            "year": 2023,
+            "category": "kategori2",
+            "description": "comingsoon",
+            "pages": 14,
+            "size": "2.3 MB",
+            "icon": "fas fa-highlighter",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 4,
+            "title": "comingsoon4",
+            "author": "Rina Amelia",
+            "year": 2025,
+            "category": "kategori3",
+            "description": "comingsoon",
+            "pages": 78,
+            "size": "11.5 MB",
+            "icon": "fas fa-scissors",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 5,
+            "title": "comingsoon5",
+            "author": "Dian Pratama",
+            "year": 2022,
+            "category": "kategori5",
+            "description": "comingsoon",
+            "pages": 25,
+            "size": "3.4 MB",
+            "icon": "fas fa-sticky-note",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 6,
+            "title": "comingsoon6",
+            "author": "Agus Wijaya",
+            "year": 2026,
+            "category": "kategori1",
+            "description": "comingsoon",
+            "pages": 42,
+            "size": "5.7 MB",
+            "icon": "fas fa-pen-fancy",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 7,
+            "title": "comingsoon7",
+            "author": "Maya Sari",
+            "year": 2024,
+            "category": "kategori4",
+            "description": "comingsoon",
+            "pages": 67,
+            "size": "7.5 MB",
+            "icon": "fas fa-marker",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 8,
+            "title": "comingsoon8",
+            "author": "Rizky Fadilah",
+            "year": 2023,
+            "category": "kategori6",
+            "description": "comingsoon",
+            "pages": 33,
+            "size": "4.1 MB",
+            "icon": "fas fa-eraser",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 9,
+            "title": "comingsoon9",
+            "author": "Linda Setiawan",
+            "year": 2025,
+            "category": "kategori2",
+            "description": "comingsoon",
+            "pages": 89,
+            "size": "10.3 MB",
+            "icon": "fas fa-clipboard",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 10,
+            "title": "comingsoon10",
+            "author": "Eko Prasetyo",
+            "year": 2022,
+            "category": "kategori3",
+            "description": "comingsoon",
+            "pages": 47,
+            "size": "5.6 MB",
+            "icon": "fas fa-book-open",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 11,
+            "title": "comingsoon11",
+            "author": "Siti Nurhaliza",
+            "year": 2026,
+            "category": "kategori5",
+            "description": "comingsoon",
+            "pages": 62,
+            "size": "7.1 MB",
+            "icon": "fas fa-paperclip",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 12,
+            "title": "comingsoon12",
+            "author": "Hendra Kurniawan",
+            "year": 2024,
+            "category": "kategori1",
+            "description": "comingsoon",
+            "pages": 38,
+            "size": "4.8 MB",
+            "icon": "fas fa-tape",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 13,
+            "title": "comingsoon13",
+            "author": "Nina Utami",
+            "year": 2023,
+            "category": "kategori4",
+            "description": "comingsoon",
+            "pages": 71,
+            "size": "8.3 MB",
+            "icon": "fas fa-compass",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 14,
+            "title": "comingsoon14",
+            "author": "Joko Susilo",
+            "year": 2025,
+            "category": "kategori6",
+            "description": "comingsoon",
+            "pages": 54,
+            "size": "6.2 MB",
+            "icon": "fas fa-folder-open",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 15,
+            "title": "comingsoon15",
+            "author": "Anita Rahayu",
+            "year": 2022,
+            "category": "kategori2",
+            "description": "comingsoon",
+            "pages": 29,
+            "size": "3.7 MB",
+            "icon": "fas fa-paint-brush",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 16,
+            "title": "comingsoon16",
+            "author": "Fajar Abdullah",
+            "year": 2026,
+            "category": "kategori3",
+            "description": "comingsoon",
+            "pages": 82,
+            "size": "9.4 MB",
+            "icon": "fas fa-ruler-combined",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 17,
+            "title": "comingsoon17",
+            "author": "Dewi Anggraini",
+            "year": 2024,
+            "category": "kategori5",
+            "description": "comingsoon",
+            "pages": 45,
+            "size": "5.3 MB",
+            "icon": "fas fa-cut",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 18,
+            "title": "comingsoon18",
+            "author": "Arya Bramantyo",
+            "year": 2023,
+            "category": "kategori1",
+            "description": "comingsoon",
+            "pages": 37,
+            "size": "4.5 MB",
+            "icon": "fas fa-drafting-compass",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 19,
+            "title": "comingsoon19",
+            "author": "Citra Lestari",
+            "year": 2025,
+            "category": "kategori4",
+            "description": "comingsoon",
+            "pages": 63,
+            "size": "7.2 MB",
+            "icon": "fas fa-stapler",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 20,
+            "title": "comingsoon20",
+            "author": "Farhan Maulana",
+            "year": 2022,
+            "category": "kategori6",
+            "description": "comingsoon",
+            "pages": 51,
+            "size": "6.0 MB",
+            "icon": "fas fa-pen-nib",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 21,
+            "title": "comingsoon21",
+            "author": "Gita Permata",
+            "year": 2026,
+            "category": "kategori2",
+            "description": "comingsoon",
+            "pages": 76,
+            "size": "8.8 MB",
+            "icon": "fas fa-chalkboard-teacher",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 22,
+            "title": "comingsoon22",
+            "author": "Irfan Hakim",
+            "year": 2024,
+            "category": "kategori3",
+            "description": "comingsoon",
+            "pages": 44,
+            "size": "5.2 MB",
+            "icon": "fas fa-highlighter",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 23,
+            "title": "comingsoon23",
+            "author": "Kartika Wulandari",
+            "year": 2023,
+            "category": "kategori5",
+            "description": "comingsoon",
+            "pages": 68,
+            "size": "7.8 MB",
+            "icon": "fas fa-file-contract",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 24,
+            "title": "comingsoon24",
+            "author": "Lukman Hakim",
+            "year": 2025,
+            "category": "kategori1",
+            "description": "comingsoon",
+            "pages": 92,
+            "size": "10.8 MB",
+            "icon": "fas fa-palette",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 25,
+            "title": "comingsoon25",
+            "author": "Mila Suryani",
+            "year": 2022,
+            "category": "kategori4",
+            "description": "comingsoon",
+            "pages": 31,
+            "size": "3.9 MB",
+            "icon": "fas fa-pencil-ruler",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 26,
+            "title": "comingsoon26",
+            "author": "Nanda Pratama",
+            "year": 2026,
+            "category": "kategori6",
+            "description": "comingsoon",
+            "pages": 58,
+            "size": "6.7 MB",
+            "icon": "fas fa-marker",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 27,
+            "title": "comingsoon27",
+            "author": "Oki Setiawan",
+            "year": 2024,
+            "category": "kategori2",
+            "description": "comingsoon",
+            "pages": 49,
+            "size": "5.9 MB",
+            "icon": "fas fa-calculator",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 28,
+            "title": "comingsoon28",
+            "author": "Putri Andini",
+            "year": 2023,
+            "category": "kategori3",
+            "description": "comingsoon",
+            "pages": 85,
+            "size": "9.9 MB",
+            "icon": "fas fa-clipboard-list",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 29,
+            "title": "comingsoon29",
+            "author": "Qory Sandioriva",
+            "year": 2025,
+            "category": "kategori5",
+            "description": "comingsoon",
+            "pages": 36,
+            "size": "4.4 MB",
+            "icon": "fas fa-paper-plane",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 30,
+            "title": "comingsoon30",
+            "author": "Rangga Saputra",
+            "year": 2022,
+            "category": "kategori1",
+            "description": "comingsoon",
+            "pages": 73,
+            "size": "8.5 MB",
+            "icon": "fas fa-bookmark",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 31,
+            "title": "comingsoon31",
+            "author": "Sari Indah",
+            "year": 2026,
+            "category": "kategori4",
+            "description": "comingsoon",
+            "pages": 41,
+            "size": "5.0 MB",
+            "icon": "fas fa-pen-square",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 32,
+            "title": "comingsoon32",
+            "author": "Taufik Hidayat",
+            "year": 2024,
+            "category": "kategori6",
+            "description": "comingsoon",
+            "pages": 66,
+            "size": "7.6 MB",
+            "icon": "fas fa-file-invoice",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 33,
+            "title": "comingsoon33",
+            "author": "Umi Kulsum",
+            "year": 2023,
+            "category": "kategori2",
+            "description": "comingsoon",
+            "pages": 27,
+            "size": "3.5 MB",
+            "icon": "fas fa-ruler-vertical",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 34,
+            "title": "comingsoon34",
+            "author": "Vina Melinda",
+            "year": 2025,
+            "category": "kategori3",
+            "description": "comingsoon",
+            "pages": 79,
+            "size": "9.2 MB",
+            "icon": "fas fa-highlighter",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 35,
+            "title": "comingsoon35",
+            "author": "Wahyu Adi",
+            "year": 2022,
+            "category": "kategori5",
+            "description": "comingsoon",
+            "pages": 53,
+            "size": "6.3 MB",
+            "icon": "fas fa-sticky-note",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 36,
+            "title": "comingsoon36",
+            "author": "Xavier Tan",
+            "year": 2026,
+            "category": "kategori1",
+            "description": "comingsoon",
+            "pages": 95,
+            "size": "11.2 MB",
+            "icon": "fas fa-pencil-alt",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 37,
+            "title": "comingsoon37",
+            "author": "Yuli Astuti",
+            "year": 2024,
+            "category": "kategori4",
+            "description": "comingsoon",
+            "pages": 48,
+            "size": "5.8 MB",
+            "icon": "fas fa-cut",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 38,
+            "title": "comingsoon38",
+            "author": "Zaki Alamsyah",
+            "year": 2023,
+            "category": "kategori6",
+            "description": "comingsoon",
+            "pages": 61,
+            "size": "7.0 MB",
+            "icon": "fas fa-book",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 39,
+            "title": "comingsoon39",
+            "author": "Aditya Nugraha",
+            "year": 2025,
+            "category": "kategori2",
+            "description": "comingsoon",
+            "pages": 34,
+            "size": "4.2 MB",
+            "icon": "fas fa-paperclip",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 40,
+            "title": "comingsoon40",
+            "author": "Bella Cantika",
+            "year": 2022,
+            "category": "kategori3",
+            "description": "comingsoon",
+            "pages": 87,
+            "size": "10.1 MB",
+            "icon": "fas fa-folder",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        },
+        {
+            "id": 41,
+            "title": "comingsoon40",
+            "author": "Bella Cantika",
+            "year": 2022,
+            "category": "kategori3",
+            "description": "comingsoon",
+            "pages": 87,
+            "size": "10.1 MB",
+            "icon": "fas fa-folder",
+            "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+            "downloadCount": 0
+        }
+    ],
+    "categories": {
+        "kategori1": "kategori 1",
+        "kategori2": "kategori 2",
+        "kategori3": "kategori 3",
+        "kategori4": "kategori 4",
+        "kategori5": "kategori 5",
+        "kategori6": "kategori 6"
+    },
+    "website": {
+        "name": "Maktabah Rasyidah",
+        "description": "Perpustakaan digital dengan nuansa klasik yang menyajikan koleksi pengetahuan untuk hidup yang lebih sehat.",
+        "year": 2026
+    },
+    "social": {
+        "facebook": "#",
+        "twitter": "#",
+        "instagram": "#"
+    }
+}
+</script>
+
+
+
+
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <center><div class="logo-text">Cerita Dunia</div></center>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div class="loading-text" style="color: var(--text-secondary); text-align: center;">Memuat.....</div>
+        </div>
+    </div>
+
+
+
+    <div class="spotlight-modal" id="spotlightModal">
+        <div class="spotlight-content">
+            <div class="spotlight-header">
+                <h3 class="spotlight-title"><i class="fas fa-search"></i> Spotlight Search</h3>
+                <div class="spotlight-search">
+                    <input type="text" class="spotlight-input" id="searchInput" placeholder="Cari artikel kesehatan...">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                <button class="close-spotlight" id="closeSpotlight">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="search-results" id="searchResults">
+                <div class="no-results">Mulai mengetik untuk mencari artikel...</div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script src="/navbar/cerita/cerita-dunia/script.js"></script>
+</body>
+</html>

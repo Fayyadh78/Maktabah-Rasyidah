@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar Module - Maktabah Rasyidah</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           NAVBAR STYLES
+           ========================================= */
+        :root {
+            --primary-color: #1a4d2e; 
+            --secondary-color: #2c1810; 
+            --accent-color: #c5a059; 
+            --accent-hover: #e6c278; 
+            --bg-paper: #f9f7f2; 
+            --bg-paper-dark: #f0ebe0; 
+            --card-bg: #ffffff;
+            --text-primary: #2c1810;
+            --text-secondary: #5d4037;
+            --text-light: #f9f7f2;
+            --gold-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+            --soft-shadow: 0 10px 30px rgba(44, 24, 16, 0.08);
+            --border-gold: 1px solid rgba(197, 160, 89, 0.4);
+            --glass-blur: blur(12px);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        /* Navbar Container */
+        .navbar-module {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(253, 251, 247, 0.95);
+            backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05); z-index: 1000; transition: var(--transition);
+        }
+        .navbar-module.scrolled { 
+            background: rgba(255, 255, 255, 0.98); 
+            padding: 0; 
+            border-bottom: 2px solid var(--accent-color); 
+        }
+        
+        .nav-container-module {
+            max-width: 1400px; margin: 0 auto; padding: 0 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            height: 80px; transition: height 0.3s ease; position: relative;
+        }
+        .navbar-module.scrolled .nav-container-module { height: 70px; }
+
+        /* Logo */
+        .logo-text-module { display: flex; flex-direction: column; line-height: 1; }
+        .logo-main-module { 
+            font-size: 1.8rem; font-weight: 700; color: var(--primary-color); 
+            font-family: 'Cinzel', serif; position: relative; 
+        }
+        .logo-main-module::first-letter { 
+            font-size: 120%; color: var(--accent-color); font-family: 'Amiri', serif; 
+        }
+        .logo-sub-module { 
+            font-size: 0.8rem; color: var(--accent-color); letter-spacing: 3px; 
+            text-transform: uppercase; font-family: 'Lato', sans-serif; 
+        }
+
+        /* Menu Desktop */
+        .nav-menu-module { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-link-module {
+            display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1rem;
+            color: var(--text-secondary); text-decoration: none; font-weight: 600;
+            border-radius: 4px; transition: var(--transition); position: relative;
+            font-family: 'Lato', sans-serif;
+        }
+        .nav-link-module:hover { color: var(--primary-color); background: rgba(197, 160, 89, 0.1); }
+        .nav-link-module::after { 
+            content: '♦'; position: absolute; bottom: -5px; left: 50%; 
+            transform: translateX(-50%) scale(0); color: var(--accent-color); 
+            font-size: 10px; transition: var(--transition); 
+        }
+        .nav-link-module:hover::after { transform: translateX(-50%) scale(1); bottom: 2px; }
+
+        /* Dropdown Desktop */
+        .nav-item-module { position: relative; }
+        .dropdown-menu-module {
+            position: absolute; top: 100%; left: 0; min-width: 220px;
+            background: #fff; border: 1px solid var(--accent-color);
+            border-radius: 0 0 8px 8px; padding: 0.5rem 0;
+            opacity: 0; visibility: hidden; transform: translateY(10px);
+            transition: var(--transition); box-shadow: var(--soft-shadow); z-index: 100;
+        }
+        .nav-item-module:hover .dropdown-menu-module { 
+            opacity: 1; visibility: visible; transform: translateY(0); 
+        }
+        .dropdown-item-module {
+            display: block; padding: 0.8rem 1.5rem; color: var(--text-secondary);
+            text-decoration: none; border-left: 3px solid transparent; transition: 0.3s;
+            font-family: 'Lato', sans-serif;
+        }
+        .dropdown-item-module:hover { 
+            background: var(--bg-paper); color: var(--primary-color); 
+            border-left: 3px solid var(--accent-color); padding-left: 2rem; 
+        }
+
+        /* HAMBURGER MENU (MOBILE TOGGLE) */
+        .hamburger-module {
+            display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1001;
+            padding: 10px; border: 1px solid transparent; border-radius: 5px;
+        }
+        .hamburger-module span {
+            display: block; width: 25px; height: 3px;
+            background-color: var(--primary-color); transition: all 0.3s ease;
+        }
+        /* Hamburger Active State Animation */
+        .hamburger-module.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger-module.active span:nth-child(2) { opacity: 0; }
+        .hamburger-module.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+        /* RESPONSIVE STYLE (MOBILE & TABLET) */
+        @media screen and (max-width: 992px) {
+            .hamburger-module { display: flex; }
+            
+            /* Mobile Menu Container */
+            .nav-menu-module {
+                position: fixed;
+                top: 0;
+                right: -100%; /* Hidden by default */
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--bg-paper);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 6rem 2rem 2rem;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+                transition: 0.4s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+                z-index: 999;
+                overflow-y: auto;
+            }
+
+            .nav-menu-module.active { right: 0; }
+
+            /* Mobile Links */
+            .nav-item-module { width: 100%; margin-bottom: 0.5rem; }
+            .nav-link-module { 
+                padding: 1rem 0; width: 100%; justify-content: space-between; 
+                border-bottom: 1px solid rgba(0,0,0,0.05);
+            }
+            .nav-link-module:hover { background: transparent; color: var(--primary-color); }
+            .nav-link-module::after { display: none; }
+            
+            /* Mobile Dropdown (Accordion) */
+            .dropdown-menu-module {
+                position: static; opacity: 1; visibility: visible;
+                transform: none; box-shadow: none; border: none;
+                background: rgba(197, 160, 89, 0.05); padding: 0;
+                max-height: 0; overflow: hidden;
+                transition: max-height 0.3s ease;
+                border-radius: 4px; width: 100%;
+            }
+            
+            .nav-item-module.active .dropdown-menu-module {
+                max-height: 800px; margin-top: 5px;
+                border: 1px solid rgba(197, 160, 89, 0.2);
+            }
+            
+            .nav-link-module i.fa-chevron-down { transition: transform 0.3s; }
+            .nav-item-module.active .nav-link-module i { color: var(--accent-color); }
+        }
+
+        @media screen and (max-width: 480px) {
+            .nav-container-module { padding: 0 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR MODULE -->
+    <nav class="navbar-module" id="navbarModule">
+        <div class="nav-container-module">
+            <a href="/" class="logo-module" id="homeLogoModule" style="text-decoration:none;">
+                <div class="logo-text-module">
+                    <span class="logo-main-module">Maktabah</span>
+                    <span class="logo-sub-module">Rasyidah</span>
+                </div>
+            </a>
+
+            <div class="nav-menu-module" id="navMenuModule">
+                <div class="nav-item-module">
+                    <a href="javascript:void(0)" class="nav-link-module"><i class="fas fa-newspaper"></i> Artikel</a>
+                    <div class="dropdown-menu-module">
+                        <a href="/navbar/artikel/artikel-umum/artikel-umum.html" class="dropdown-item-module">Artikel Umum</a>
+                        <a href="/navbar/artikel/artikel-bahasa/artikel-bahasa.html" class="dropdown-item-module">Artikel Bahasa</a>
+                        <a href="/navbar/artikel/artikel-pendidikan/artikel-pendidikan.html" class="dropdown-item-module">Artikel Pendidikan</a>
+                        <a href="/navbar/artikel/artikel-sosial/artikel-sosial.html" class="dropdown-item-module">Artikel Sosial Humaniora</a>
+                        <a href="/navbar/artikel/artikel-agama/artikel-agama.html" class="dropdown-item-module">Artikel Agama</a>
+                        <a href="/navbar/artikel/artikel-internasional/artikel-internasional.html" class="dropdown-item-module">Artikel Internasional</a>
+                    </div>
+                </div>
+                <div class="nav-item-module">
+                    <a href="javascript:void(0)" class="nav-link-module"><i class="fas fa-book-open"></i> Buku</a>
+                    <div class="dropdown-menu-module">
+                        <a href="/navbar/buku/buku-fiksi/buku-fiksi.html" class="dropdown-item-module">Buku Fiksi</a>
+                        <a href="/navbar/buku/buku-non-fiksi/buku-non-fiksi.html" class="dropdown-item-module">Buku Non-Fiksi</a>
+                    </div>
+                </div>
+                <div class="nav-item-module">
+                    <a href="javascript:void(0)" class="nav-link-module"><i class="fas fa-landmark"></i> Cerita</a>
+                    <div class="dropdown-menu-module">
+                        <a href="/navbar/cerita/cerita-nusantara/cerita-nusantara.html" class="dropdown-item-module">Nusantara</a>
+                        <a href="/navbar/cerita/cerita-dunia-islam/cerita-dunia-islam.html" class="dropdown-item-module">Dunia Islam</a>
+                        <a href="/navbar/cerita/cerita-dunia/cerita-dunia.html" class="dropdown-item-module">Dunia</a>
+                    </div>
+                </div>
+                <div class="nav-item-module">
+                    <a href="javascript:void(0)" class="nav-link-module"><i class="fas fa-graduation-cap"></i> Jurnal</a>
+                    <div class="dropdown-menu-module">
+                        <a href="/navbar/jurnal/jurnal-sains/jurnal-sains.html" class="dropdown-item-module">Sains</a>
+                        <a href="/navbar/jurnal/jurnal-sosial/jurnal-sosial.html" class="dropdown-item-module">Sosial</a>
+                        <a href="/navbar/jurnal/jurnal-keislaman/jurnal-keislaman.html" class="dropdown-item-module">Keislaman</a>
+                        <a href="/navbar/jurnal/jurnal-teknik/jurnal-teknik.html" class="dropdown-item-module">Teknik</a>
+                        <a href="/navbar/jurnal/jurnal-pendidikan/jurnal-pendidikan.html" class="dropdown-item-module">Pendidikan</a>
+                    </div>
+                </div>
+                <div class="nav-item-module">
+                    <a href="javascript:void(0)" class="nav-link-module"><i class="fas fa-user-graduate"></i> Berita</a>
+                    <div class="dropdown-menu-module">
+                        <a href="/navbar/berita/berita-sains/berita-sains.html" class="dropdown-item-module">Sains</a>
+                        <a href="/navbar/berita/berita-sosial/berita-sosial.html" class="dropdown-item-module">Sosial</a>
+                        <a href="/navbar/berita/berita-keislaman/berita-keislaman.html" class="dropdown-item-module">Keislaman</a>
+                        <a href="/navbar/berita/berita-teknik/berita-teknik.html" class="dropdown-item-module">Teknik</a>
+                        <a href="/navbar/berita/berita-pendidikan/berita-pendidikan.html" class="dropdown-item-module">Pendidikan</a>
+                    </div>
+                </div>
+                <div class="nav-item-module">
+                    <a href="javascript:void(0)" class="nav-link-module"><i class="fas fa-book"></i> Kamus</a>
+                    <div class="dropdown-menu-module">
+                        <a href="/navbar/kamus/kamus-bahasa-inggris/kamus-bahasa-inggris.html" class="dropdown-item-module">Kamus Bahasa Inggris</a>
+                        <a href="/navbar/kamus/kamus-bahasa-arab/kamus-bahasa-arab.html" class="dropdown-item-module">Kamus Bahasa Arab</a>
+                        <a href="/navbar/kamus/kamus-bahasa-jepang/kamus-bahasa-jepang.html" class="dropdown-item-module">Kamus Jepang</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div class="hamburger-module" id="hamburgerBtnModule">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <script>
+        class NavbarModule {
+            constructor() {
+                this.DOM = {
+                    navbar: document.getElementById('navbarModule'),
+                    hamburgerBtn: document.getElementById('hamburgerBtnModule'),
+                    navMenu: document.getElementById('navMenuModule'),
+                    homeLogo: document.getElementById('homeLogoModule')
+                };
+                
+                // Pastikan elemen ditemukan sebelum init
+                if (this.DOM.hamburgerBtn && this.DOM.navMenu) {
+                    this.init();
+                } else {
+                    console.error("Navbar elements not found");
+                }
+            }
+            
+            init() {
+                this.initMobileMenu();
+                this.initNavbarScroll();
+            }
+            
+            initMobileMenu() {
+                // Toggle menu mobile (Hamburger Click)
+                this.DOM.hamburgerBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.DOM.hamburgerBtn.classList.toggle('active');
+                    this.DOM.navMenu.classList.toggle('active');
+                });
+
+                // Tutup menu saat klik di luar area menu dan bukan tombol hamburger
+                document.addEventListener('click', (e) => {
+                    if (this.DOM.navMenu.classList.contains('active')) {
+                        // Jika yang diklik bukan hamburger DAN bukan bagian dalam menu
+                        if (!this.DOM.hamburgerBtn.contains(e.target) && !this.DOM.navMenu.contains(e.target)) {
+                            this.DOM.hamburgerBtn.classList.remove('active');
+                            this.DOM.navMenu.classList.remove('active');
+                        }
+                    }
+                });
+
+                // Dropdown mobile accordion logic
+                const navLinks = this.DOM.navMenu.querySelectorAll('.nav-link-module');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        // Hanya berlaku di tampilan mobile/tablet
+                        if (window.innerWidth <= 992) {
+                            const parent = link.parentElement;
+                            const hasDropdown = parent.querySelector('.dropdown-menu-module');
+                            
+                            if (hasDropdown) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                
+                                // Tutup dropdown lain yang sedang terbuka
+                                const allItems = this.DOM.navMenu.querySelectorAll('.nav-item-module');
+                                allItems.forEach(item => {
+                                    if (item !== parent && item.classList.contains('active')) {
+                                        item.classList.remove('active');
+                                    }
+                                });
+                                
+                                // Toggle dropdown yang diklik
+                                parent.classList.toggle('active');
+                            }
+                        }
+                    });
+                });
+            }
+            
+            initNavbarScroll() {
+                window.addEventListener('scroll', () => {
+                    if (this.DOM.navbar) {
+                        this.DOM.navbar.classList.toggle('scrolled', window.scrollY > 50);
+                    }
+                });
+            }
+        }
+
+        // Inisialisasi Langsung (Tanpa DOMContentLoaded karena ini modul injeksi)
+        if (!window.navbarModuleInstance) {
+            window.navbarModuleInstance = new NavbarModule();
+        }
+    </script>
+</body>
+</html>

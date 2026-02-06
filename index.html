@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maktabah Rasyida - Khazanah Ilmu Klasik</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <!-- CSS File - DIPERBAIKI -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <center><div class="logo-text">Maktabah Rasyida</div></center>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div class="loading-text" style="color: var(--text-secondary); text-align: center;">Memuat khazanah ilmu...</div>
+        </div>
+    </div>
+
+    <!--iklan-->
+    <div id="navbar-container"></div>
+
+    <div class="ad-popup-overlay" id="adPopup">
+        <div class="ad-popup-container">
+            <div class="ad-popup">
+                <button class="close-ad-btn" id="closeAdBtn"><i class="fas fa-times"></i></button>
+                <div class="ad-content">
+                    <img src="iklan.jpg" alt="Promo Maktabah Rasyida">
+                    <div class="ad-text">
+                        <h2 style="font-family: 'Amiri'; color: var(--primary-color);">Ahlan Wa Sahlan</h2>
+                        <p>Nikmati kenyamanan membaca di perpustakaan pribadi Anda.</p>
+                        <p class="ad-subtext">Koleksi 50.001+ buku tersedia untuk Anda</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--WA dibagian kanan bawah-->
+    <!-- Cari bagian WhatsApp popup dan ubah menjadi: -->
+<div class="whatsapp-popup" id="whatsappPopup">
+    <div class="whatsapp-options">
+        <div class="whatsapp-header">
+            <button class="close-whatsapp" id="closeWhatsapp" style="border:none; background:none; cursor:pointer; position: absolute; top: 15px; right: 15px; font-size: 1.2rem; color: var(--text-secondary);"><i class="fas fa-times"></i></button>
+            <h3><i class="fab fa-whatsapp"></i> WhatsApp</h3>
+        </div>
+        <div class="whatsapp-list">
+            <a href="https://wa.me/6281219189448?text=Assalamualaikum Wr Wb. Saya ingin menanyakan tentang" target="_blank" class="whatsapp-item">
+                <i class="fas fa-question-circle" style="color:#25D366"></i><div><h4>Tanya Jawab</h4><p>Seputar koleksi kitab</p></div>
+            </a>
+            <a href="https://wa.me/6281219189448?text=Assalamualaikum Wr Wb. Perkenalkan saya/kami dari .... ingin ......" target="_blank" class="whatsapp-item">
+                <i class="fas fa-handshake" style="color:#25D366"></i><div><h4>Kerja Sama</h4><p>Wakaf buku & kemitraan</p></div>
+            </a>
+        </div>
+    </div>
+</div>
+
+    <div class="whatsapp-float" id="whatsappFloat"><i class="fab fa-whatsapp"></i></div>
+
+    <!--Popup Artikel-->
+    <div class="category-popup-overlay" id="articlePopup">
+        <div class="category-popup">
+            <button class="close-popup-btn" id="closeArticlePopup"><i class="fas fa-times"></i></button>
+            <h3><i class="fas fa-newspaper"></i> Artikel</h3>
+            <div class="category-popup-grid">
+                <a href="/navbar/artikel/artikel-umum/artikel-umum.html" class="category-popup-item">
+                    <i class="fas fa-globe"></i>
+                    <div>
+                        <h4>Artikel Umum</h4>
+                        <p>Berbagai topik umum</p>
+                    </div>
+                </a>
+                <a href="/navbar/artikel/artikel-bahasa/artikel-bahasa.html" class="category-popup-item">
+                    <i class="fas fa-language"></i>
+                    <div>
+                        <h4>Artikel Bahasa</h4>
+                        <p>Linguistik dan bahasa</p>
+                    </div>
+                </a>
+                <a href="/navbar/artikel/artikel-pendidikan/artikel-pendidikan.html" class="category-popup-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <div>
+                        <h4>Artikel Pendidikan</h4>
+                        <p>Dunia pendidikan</p>
+                    </div>
+                </a>
+                <a href="/navbar/artikel/artikel-sosial/artikel-sosial.html" class="category-popup-item">
+                    <i class="fas fa-users"></i>
+                    <div>
+                        <h4>Artikel Sosial Humaniora</h4>
+                        <p>Masyarakat dan budaya</p>
+                    </div>
+                </a>
+                <a href="/navbar/artikel/artikel-agama/artikel-agama.html" class="category-popup-item">
+                    <i class="fas fa-mosque"></i>
+                    <div>
+                        <h4>Artikel Agama</h4>
+                        <p>Keagamaan dan spiritual</p>
+                    </div>
+                </a>
+                <a href="/navbar/artikel/artikel-internasional/artikel-internasional.html" class="category-popup-item">
+                    <i class="fas fa-earth-asia"></i>
+                    <div>
+                        <h4>Artikel Internasional</h4>
+                        <p>Isu global</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!--Popup Buku-->
+    <div class="category-popup-overlay" id="bukuPopup">
+        <div class="category-popup">
+            <button class="close-popup-btn" id="closeBukuPopup"><i class="fas fa-times"></i></button>
+            <h3><i class="fas fa-book-open"></i> Buku</h3>
+            <div class="category-popup-grid">
+                <a href="/navbar/buku/buku-fiksi/buku-fiksi.html" class="category-popup-item">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <h4>Buku Fiksi</h4>
+                        <p>Novel dan cerita fiksi</p>
+                    </div>
+                </a>
+                <a href="/navbar/buku/buku-non-fiksi/buku-non-fiksi.html" class="category-popup-item">
+                    <i class="fas fa-book-reader"></i>
+                    <div>
+                        <h4>Buku Non-Fiksi</h4>
+                        <p>Buku pengetahuan dan referensi</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!--Popup Cerita-->
+    <div class="category-popup-overlay" id="ceritaPopup">
+        <div class="category-popup">
+            <button class="close-popup-btn" id="closeCeritaPopup"><i class="fas fa-times"></i></button>
+            <h3><i class="fas fa-landmark"></i> Cerita</h3>
+            <div class="category-popup-grid">
+                <a href="/navbar/cerita/cerita-nusantara/cerita-nusantara.html" class="category-popup-item">
+                    <i class="fas fa-map"></i>
+                    <div>
+                        <h4>Nusantara</h4>
+                        <p>Cerita rakyat Indonesia</p>
+                    </div>
+                </a>
+                <a href="/navbar/cerita/cerita-dunia-islam/cerita-dunia-islam.html" class="category-popup-item">
+                    <i class="fas fa-mosque"></i>
+                    <div>
+                        <h4>Dunia Islam</h4>
+                        <p>Cerita dari dunia Islam</p>
+                    </div>
+                </a>
+                <a href="/navbar/cerita/cerita-dunia/cerita-dunia.html" class="category-popup-item">
+                    <i class="fas fa-globe"></i>
+                    <div>
+                        <h4>Dunia</h4>
+                        <p>Cerita dari seluruh dunia</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!--Popup Jurnal-->
+    <div class="category-popup-overlay" id="jurnalPopup">
+        <div class="category-popup">
+            <button class="close-popup-btn" id="closeJurnalPopup"><i class="fas fa-times"></i></button>
+            <h3><i class="fas fa-graduation-cap"></i> Jurnal</h3>
+            <div class="category-popup-grid">
+                <a href="/navbar/jurnal/jurnal-sains/jurnal-sains.html" class="category-popup-item">
+                    <i class="fas fa-flask"></i>
+                    <div>
+                        <h4>Sains</h4>
+                        <p>Jurnal ilmu pengetahuan</p>
+                    </div>
+                </a>
+                <a href="/navbar/jurnal/jurnal-sosial/jurnal-sosial.html" class="category-popup-item">
+                    <i class="fas fa-users"></i>
+                    <div>
+                        <h4>Sosial</h4>
+                        <p>Jurnal sosial humaniora</p>
+                    </div>
+                </a>
+                <a href="/navbar/jurnal/jurnal-keislaman/jurnal-keislaman.html" class="category-popup-item">
+                    <i class="fas fa-mosque"></i>
+                    <div>
+                        <h4>Keislaman</h4>
+                        <p>Jurnal studi Islam</p>
+                    </div>
+                </a>
+                <a href="/navbar/jurnal/jurnal-teknik/jurnal-teknik.html" class="category-popup-item">
+                    <i class="fas fa-cogs"></i>
+                    <div>
+                        <h4>Teknik</h4>
+                        <p>Jurnal teknik dan teknologi</p>
+                    </div>
+                </a>
+                <a href="/navbar/jurnal/jurnal-pendidikan/jurnal-pendidikan.html" class="category-popup-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <div>
+                        <h4>Pendidikan</h4>
+                        <p>Jurnal pendidikan</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!--Popup Berita-->
+    <div class="category-popup-overlay" id="beritaPopup">
+        <div class="category-popup">
+            <button class="close-popup-btn" id="closeBeritaPopup"><i class="fas fa-times"></i></button>
+            <h3><i class="fas fa-user-graduate"></i> Berita</h3>
+            <div class="category-popup-grid">
+                <a href="/navbar/berita/berita-sains/berita-sains.html" class="category-popup-item">
+                    <i class="fas fa-flask"></i>
+                    <div>
+                        <h4>Sains</h4>
+                        <p>Berita ilmu pengetahuan</p>
+                    </div>
+                </a>
+                <a href="/navbar/berita/berita-sosial/berita-sosial.html" class="category-popup-item">
+                    <i class="fas fa-users"></i>
+                    <div>
+                        <h4>Sosial</h4>
+                        <p>Berita sosial humaniora</p>
+                    </div>
+                </a>
+                <a href="/navbar/berita/berita-keislaman/berita-keislaman.html" class="category-popup-item">
+                    <i class="fas fa-mosque"></i>
+                    <div>
+                        <h4>Keislaman</h4>
+                        <p>Berita dunia Islam</p>
+                    </div>
+                </a>
+                <a href="/navbar/berita/berita-teknik/berita-teknik.html" class="category-popup-item">
+                    <i class="fas fa-cogs"></i>
+                    <div>
+                        <h4>Teknik</h4>
+                        <p>Berita teknik dan teknologi</p>
+                    </div>
+                </a>
+                <a href="/navbar/berita/berita-pendidikan/berita-pendidikan.html" class="category-popup-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <div>
+                        <h4>Pendidikan</h4>
+                        <p>Berita pendidikan</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!--Popup Kamus-->
+    <div class="category-popup-overlay" id="kamusPopup">
+        <div class="category-popup">
+            <button class="close-popup-btn" id="closeKamusPopup"><i class="fas fa-times"></i></button>
+            <h3><i class="fas fa-book"></i> Kamus</h3>
+            <div class="category-popup-grid">
+                <a href="/navbar/kamus/kamus-bahasa-inggris/kamus-bahasa-inggris.html" class="category-popup-item">
+                    <i class="fas fa-language"></i>
+                    <div>
+                        <h4>Bahasa Inggris</h4>
+                        <p>Kamus Inggris-Indonesia</p>
+                    </div>
+                </a>
+                <a href="/navbar/kamus/kamus-bahasa-arab/kamus-bahasa-arab.html" class="category-popup-item">
+                    <i class="fas fa-mosque"></i>
+                    <div>
+                        <h4>Bahasa Arab</h4>
+                        <p>Kamus Arab-Indonesia</p>
+                    </div>
+                </a>
+                <a href="/navbar/kamus/kamus-bahasa-jepang/kamus-bahasa-jepang.html" class="category-popup-item">
+                    <i class="fas fa-language"></i>
+                    <div>
+                        <h4>Bahasa Jepang</h4>
+                        <p>Kamus Jepang-Indonesia</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!--Bagian utama-->
+    <main class="main-content">
+        <section class="hero-section">
+            <div class="hero-background"><div class="hero-bg-ornament"></div></div>
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Selami Samudra <br><span class="highlight">Ilmu Pengetahuan</span></h1>
+                    <p class="hero-subtitle">Perpustakaan digital dengan nuansa klasik yang menyajikan ribuan koleksi manuskrip, kitab, artikel, novel, karya ilmiah, dan cerita rakyat dalam satu genggaman.</p>
+                </div>
+                <div class="hero-image">
+                    <div class="floating-book">
+                        <div class="book-cover">
+                            <div class="book-title">Maktabah<br>Rasyida</div>
+                            <div style="color:var(--accent-color); font-size:1.5rem;"><i class="fas fa-book-open"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--Buku Trending-->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-title"><i class="fas fa-fire"></i><h2>Buku Trending</h2></div>
+            </div>
+            <div class="trending-container">
+                <button class="carousel-btn carousel-prev" id="carouselPrev"><i class="fas fa-chevron-left"></i></button>
+                <div class="trending-carousel" id="trendingCarousel">
+                    <!-- Buku Trending dengan tombol "Baca Disini" -->
+                    <div class="book-card" data-content-id="atomic-habits">
+                        <div class="trending-badge"><i class="fas fa-fire"></i> TRENDING</div>
+                        <img src="asset/rakbuku.jpg" class="book-image" alt="Atomic Habits">
+                        <div class="book-content">
+                            <h3 class="book-title">Atomic Habits</h3>
+                            <div class="book-author">James Clear</div>
+                            <span class="book-category">Buku / Non-Fiksi</span>
+                            <button class="read-btn left-align">Baca Disini</button>
+                        </div>
+                    </div>
+                    
+                    <div class="book-card" data-content-id="air-musyammas">
+                        <div class="trending-badge"><i class="fas fa-fire"></i> TRENDING</div>
+                        <img src="asset/rakbuku.jpg" class="book-image" alt="Air Musyammas Dalam Fiqih dan Kesehatan">
+                        <div class="book-content">
+                            <h3 class="book-title">Air Musyammas Dalam Fiqih dan Kesehatan</h3>
+                            <div class="book-author">Muhammad Fayyadh Al Farel</div>
+                            <span class="book-category">Artikel / Agama</span>
+                            <button class="read-btn left-align">Baca Disini</button>
+                        </div>
+                    </div>
+                    
+                    <div class="book-card" data-content-id="tips-keuangan">
+                        <div class="trending-badge"><i class="fas fa-fire"></i> TRENDING</div>
+                        <img src="asset/rakbuku.jpg" class="book-image" alt="Tips Mengelola Keuangan">
+                        <div class="book-content">
+                            <h3 class="book-title">TIPS MENGELOLA KEUANGAN</h3>
+                            <div class="book-author">Muhammad Fayyadh Al Farel</div>
+                            <span class="book-category">Artikel / Umum</span>
+                            <button class="read-btn left-align">Baca Disini</button>
+                        </div>
+                    </div>
+                    
+                    <div class="book-card" data-content-id="buku4">
+                        <div class="trending-badge"><i class="fas fa-fire"></i> TRENDING</div>
+                        <img src="asset/rakbuku.jpg" class="book-image" alt="Judul Buku 4">
+                        <div class="book-content">
+                            <h3 class="book-title">Masukkan Judul Buku 4</h3>
+                            <div class="book-author">Nama Penulis 4</div>
+                            <span class="book-category">Kategori 4</span>
+                            <button class="read-btn left-align">Baca Disini</button>
+                        </div>
+                    </div>
+                    
+                    <div class="book-card" data-content-id="buku5">
+                        <div class="trending-badge"><i class="fas fa-fire"></i> TRENDING</div>
+                        <img src="asset/rakbuku.jpg" class="book-image" alt="Judul Buku 5">
+                        <div class="book-content">
+                            <h3 class="book-title">Masukkan Judul Buku 5</h3>
+                            <div class="book-author">Nama Penulis 5</div>
+                            <span class="book-category">Kategori 5</span>
+                            <button class="read-btn left-align">Baca Disini</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn carousel-next" id="carouselNext"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <!--Kategori Populer-->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-title"><i class="fas fa-th-large"></i><h2>Kategori Populer</h2></div>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card" data-category="artikel">
+                    <div class="category-icon"><i class="fas fa-newspaper"></i></div>
+                    <h3>Artikel</h3>
+                    <p style="color:var(--text-secondary)">Beragam Topik</p>
+                </div>
+                <div class="category-card" data-category="buku">
+                    <div class="category-icon"><i class="fas fa-book-open"></i></div>
+                    <h3>Buku</h3>
+                    <p style="color:var(--text-secondary)">Fiksi & Non-Fiksi</p>
+                </div>
+                <div class="category-card" data-category="cerita">
+                    <div class="category-icon"><i class="fas fa-landmark"></i></div>
+                    <h3>Cerita</h3>
+                    <p style="color:var(--text-secondary)">Nusantara & Dunia</p>
+                </div>
+                <div class="category-card" data-category="jurnal">
+                    <div class="category-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Jurnal</h3>
+                    <p style="color:var(--text-secondary)">Penelitian Ilmiah</p>
+                </div>
+                <div class="category-card" data-category="berita">
+                    <div class="category-icon"><i class="fas fa-user-graduate"></i></div>
+                    <h3>Berita</h3>
+                    <p style="color:var(--text-secondary)">Informasi Terkini</p>
+                </div>
+                <div class="category-card" data-category="kamus">
+                    <div class="category-icon"><i class="fas fa-book"></i></div>
+                    <h3>Kamus</h3>
+                    <p style="color:var(--text-secondary)">Bahasa & Terjemahan</p>
+                </div>
+            </div>
+        </section>
+
+        <!--Rekomendasi Pembaca-->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-title"><i class="fas fa-star"></i><h2>Rekomendasi Pembaca</h2></div>
+            </div>
+            <div class="recommendations-grid" id="recommendationsGrid">
+                <!-- Rekomendasi dengan tombol "Baca Disini" -->
+                <div class="recommendation-card" data-content-id="rekomendasi1">
+                    <img src="asset/rakbuku.jpg" class="recommendation-image" alt="Rekomendasi Buku 1">
+                    <div class="recommendation-content">
+                        <h3>Rekomendasi Buku 1</h3>
+                        <p style="font-size:0.8rem; color:#666">Deskripsi karya 1 - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <div style="margin-top:5px; font-size:0.8rem; color:var(--accent-color)">Kategori: Ganti Kategori 1</div><br><br>
+                        <button class="read-btn left-align">Baca Disini</button>
+                    </div>
+                </div>
+                
+                <div class="recommendation-card" data-content-id="rekomendasi2">
+                    <img src="asset/rakbuku.jpg" class="recommendation-image" alt="Rekomendasi Buku 2">
+                    <div class="recommendation-content">
+                        <h3>Rekomendasi Buku 2</h3>
+                        <p style="font-size:0.8rem; color:#666">Deskripsi karya 2 - Sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                        <div style="margin-top:5px; font-size:0.8rem; color:var(--accent-color)">Kategori: Ganti Kategori 2</div><br><br>
+                        <button class="read-btn left-align">Baca Disini</button>
+                    </div>
+                </div>
+                
+                <div class="recommendation-card" data-content-id="rekomendasi3">
+                    <img src="asset/rakbuku.jpg" class="recommendation-image" alt="Rekomendasi Buku 3">
+                    <div class="recommendation-content">
+                        <h3>Rekomendasi Buku 3</h3>
+                        <p style="font-size:0.8rem; color:#666">Deskripsi karya 3 - Ut enim ad minim veniam, quis nostrud exercitation.</p>
+                        <div style="margin-top:5px; font-size:0.8rem; color:var(--accent-color)">Kategori: Ganti Kategori 3</div><br><br>
+                        <button class="read-btn left-align">Baca Disini</button>
+                    </div>
+                </div>
+                
+                <div class="recommendation-card" data-content-id="rekomendasi4">
+                    <img src="asset/rakbuku.jpg" class="recommendation-image" alt="Rekomendasi Buku 4">
+                    <div class="recommendation-content">
+                        <h3>Rekomendasi Buku 4</h3>
+                        <p style="font-size:0.8rem; color:#666">Deskripsi karya 4 - Duis aute irure dolor in reprehenderit in voluptate.</p>
+                        <div style="margin-top:5px; font-size:0.8rem; color:var(--accent-color)">Kategori: Ganti Kategori 4</div><br><br>
+                        <button class="read-btn left-align">Baca Disini</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="footer-logo">Maktabah Rasyidah</div>
+                <p class="footer-description">Perpustakaan digital dengan nuansa klasik yang menyajikan koleksi pengetahuan untuk hidup yang lebih sehat.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Navigasi Lengkap</h3>
+                <ul class="footer-links">
+                    <li><a href="#" data-category="artikel"><i class="fas fa-newspaper"></i> Artikel</a></li>
+                    <li><a href="#" data-category="buku"><i class="fas fa-book-open"></i> Buku</a></li>
+                    <li><a href="#" data-category="cerita"><i class="fas fa-landmark"></i> Cerita</a></li>
+                    <li><a href="#" data-category="jurnal"><i class="fas fa-graduation-cap"></i> Jurnal</a></li>
+                    <li><a href="#" data-category="berita"><i class="fas fa-user-graduate"></i> Berita</a></li>
+                    <li><a href="#" data-category="kamus"><i class="fas fa-book"></i> Kamus</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Bantuan</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Pusat Bantuan</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Kontak Kami</a></li>
+                    <li><a href="#">Kebijakan Privasi</a></li>
+                    <li><a href="#">Syarat Layanan</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Maktabah Rasyidah. Hak cipta dilindungi.<br>Copyright © 2026 Fairuz Zumar/Makna Desain. Seluruh Hak Cipta Dilindungi.</p>
+            <div class="footer-bottom-links"></div>
+        </div>
+    </footer>
+
+    <!-- Modal Preview PDF untuk Index -->
+    <div class="preview-modal" id="previewModal">
+        <div class="modal-content-pdf">
+            <div class="modal-header-pdf">
+                <h3 class="modal-title-pdf">
+                    <i class="fas fa-book"></i> <span id="previewTitle">Judul Buku</span>
+                </h3>
+                <div class="modal-actions">
+                    <button class="modal-btn btn-open-drive" id="openDriveBtn">
+                        <i class="fab fa-google-drive"></i> Buka di Drive
+                    </button>
+                    <button class="modal-btn btn-download-pdf" id="downloadPdfBtn">
+                        <i class="fas fa-download"></i> Download PDF
+                    </button>
+                    <button class="close-modal-pdf" id="closePdfPreview">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body-pdf">
+                <div class="pdf-frame-container">
+                    <div class="pdf-loading" id="pdfLoading">
+                        <div class="loading-spinner"></div>
+                        <div class="loading-text">Memuat PDF...</div>
+                    </div>
+                    <iframe 
+                        class="pdf-frame" 
+                        id="pdfFrame"
+                        src="" 
+                        frameborder="0"
+                        onload="document.getElementById('pdfLoading').style.display = 'none'"
+                        onerror="document.getElementById('pdfLoading').innerHTML = '<div style=\"text-align: center; padding: 2rem;\"><i class=\"fas fa-exclamation-triangle\" style=\"font-size: 2rem; color: var(--accent-color); margin-bottom: 1rem;\"></i><p style=\"color: var(--text-secondary);\">Tidak dapat memuat preview. Silakan buka di Google Drive.</p><button onclick=\"window.open(document.getElementById(\\'openDriveBtn\\').getAttribute(\\'data-url\\'), \\'_blank\\')\" style=\"margin-top: 1rem; padding: 0.8rem 1.5rem; background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); border: none; border-radius: 6px; color: white; cursor: pointer;\"><i class=\"fab fa-google-drive\"></i> Buka di Google Drive</button></div>'"
+                    >
+                    </iframe>
+                </div>
+            </div>
+            <div class="modal-footer-pdf">
+                <div class="pdf-info">
+                    <div class="pdf-info-item">
+                        <i class="fas fa-user"></i>
+                        <span id="previewAuthor">Penulis</span>
+                    </div>
+                    <div class="pdf-info-item">
+                        <i class="fas fa-book"></i>
+                        <span id="previewCategory">Kategori</span>
+                    </div>
+                    <div class="pdf-info-item">
+                        <i class="fas fa-download"></i>
+                        <span id="previewDownloads">0 kali diunduh</span>
+                    </div>
+                </div>
+                <div style="color: var(--accent-color); font-size: 0.85rem;">
+                    <i class="fas fa-info-circle"></i> Preview mungkin tidak tersedia untuk beberapa file
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Konfigurasi Konten (Data Buku/Artikel) -->
+    <script type="application/json" id="content-config">
+    {
+        "contents": {
+            "atomic-habits": {
+                "title": "Atomic Habits",
+                "author": "James Clear",
+                "category": "Buku / Non-Fiksi",
+                "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+                "downloadCount": 0
+            },
+            "air-musyammas": {
+                "title": "Air Musyammas Dalam Fiqih dan Kesehatan",
+                "author": "Muhammad Fayyadh Al Farel",
+                "category": "Artikel / Agama",
+                "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+                "downloadCount": 0
+            },
+            "tips-keuangan": {
+                "title": "TIPS MENGELOLA KEUANGAN",
+                "author": "Muhammad Fayyadh Al Farel",
+                "category": "Artikel / Umum",
+                "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+                "downloadCount": 0
+            },
+            "buku4": {
+                "title": "Masukkan Judul Buku 4",
+                "author": "Nama Penulis 4",
+                "category": "Kategori 4",
+                "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+                "downloadCount": 0
+            },
+            "buku5": {
+                "title": "Masukkan Judul Buku 5",
+                "author": "Nama Penulis 5",
+                "category": "Kategori 5",
+                "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+                "downloadCount": 0
+            },
+            "rekomendasi1": {
+                "title": "Rekomendasi Buku 1",
+                "author": "Penulis Rekomendasi 1",
+                "category": "Kategori 1",
+                "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+                "downloadCount": 0
+            },
+            "rekomendasi2": {
+                "title": "Rekomendasi Buku 2",
+                "author": "Penulis Rekomendasi 2",
+                "category": "Kategori 2",
+                "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+                "downloadCount": 0
+            },
+            "rekomendasi3": {
+                "title": "Rekomendasi Buku 3",
+                "author": "Penulis Rekomendasi 3",
+                "category": "Kategori 3",
+                "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+                "downloadCount": 0
+            },
+            "rekomendasi4": {
+                "title": "Rekomendasi Buku 4",
+                "author": "Penulis Rekomendasi 4",
+                "category": "Kategori 4",
+                "pdfUrl": "https://drive.google.com/file/d/137ZVL623uMv3MMuBVnoKybHH40_w7vTs/view?usp=sharing",
+                "downloadCount": 0
+            }
+        },
+        "storageKey": "maktabah_index_downloads"
+    }
+    </script>
+
+    <!-- JavaScript File - DIPERBAIKI -->
+    <script src="script.js"></script>
+</body>
+</html>
