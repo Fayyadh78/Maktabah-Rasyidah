@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Artikel Umum | Maktabah Rasyidah</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a4d2e;
+            --secondary-color: #2c1810;
+            --accent-color: #c5a059;
+            --bg-paper: #f9f7f2;
+            --card-bg: #ffffff;
+            --text-primary: #2c1810;
+            --text-secondary: #5d4037;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: var(--bg-paper);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 250px;
+            background: var(--secondary-color);
+            color: white;
+            padding: 2rem 1.5rem;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .sidebar-logo {
+            font-family: 'Amiri', serif;
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-subtitle {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1rem;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: rgba(197, 160, 89, 0.2);
+            color: var(--accent-color);
+        }
+
+        .nav-links i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .logout-btn {
+            margin-top: auto;
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid rgba(220, 53, 69, 0.4);
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            font-family: 'Amiri', serif;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .stat-card i {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ACTION BUTTONS */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(197, 160, 89, 0.1);
+            color: var(--accent-color);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+        }
+
+        .btn-danger {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .btn-warning {
+            background: var(--warning-color);
+            color: var(--text-primary);
+        }
+
+        /* ARTICLES TABLE */
+        .articles-table-container {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+        }
+
+        th {
+            padding: 1.2rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+            transition: background 0.3s ease;
+        }
+
+        tbody tr:hover {
+            background: rgba(197, 160, 89, 0.05);
+        }
+
+        td {
+            padding: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .title-cell {
+            font-weight: 600;
+            color: var(--primary-color);
+            max-width: 250px;
+        }
+
+        .actions-cell {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 0.8rem;
+            font-size: 0.85rem;
+            border-radius: 4px;
+        }
+
+        /* MODAL */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 12px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border: 2px solid var(--accent-color);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(26, 77, 46, 0.1), rgba(197, 160, 89, 0.1));
+        }
+
+        .modal-title {
+            color: var(--primary-color);
+            font-family: 'Amiri', serif;
+            font-size: 1.3rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--accent-color);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: 6px;
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            background: var(--bg-paper);
+            color: var(--text-primary);
+            transition: border 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .modal-footer {
+            padding: 1.5rem;
+            border-top: 1px solid rgba(197, 160, 89, 0.3);
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        /* NOTIFICATION */
+        .notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 1001;
+            animation: slideInRight 0.3s ease;
+        }
+
+        .notification.success {
+            background: linear-gradient(135deg, var(--primary-color), var(--success-color));
+        }
+
+        .notification.error {
+            background: linear-gradient(135deg, var(--danger-color), #c53030);
+        }
+
+        .notification.warning {
+            background: linear-gradient(135deg, var(--warning-color), #e53e3e);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 200px;
+            }
+            .main-content {
+                margin-left: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .admin-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .actions-cell {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 1rem;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            th, td {
+                padding: 0.8rem;
+                font-size: 0.85rem;
+            }
+            
+            .btn-sm {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">Maktabah Rasyidah</div>
+                <div class="sidebar-subtitle">Admin Panel</div>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="#" class="active"><i class="fas fa-newspaper"></i> Artikel Umum</a></li>
+                <li><a href="#"><i class="fas fa-chart-bar"></i> Statistik</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Penulis</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Pengaturan</a></li>
+                <li><a href="/navbar/artikel/artikel-umum/artikel-umum.html" target="_blank"><i class="fas fa-eye"></i> Lihat Website</a></li>
+                <li><a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <div class="header">
+                <h1><i class="fas fa-newspaper"></i> Manajemen Artikel Umum</h1>
+                <div class="export-options">
+                    <button class="btn btn-secondary" id="exportBtn">
+                        <i class="fas fa-file-export"></i> Export Data
+                    </button>
+                </div>
+            </div>
+
+            <!-- STATISTICS -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-file-alt"></i>
+                    <div class="stat-number" id="totalArticlesCount">0</div>
+                    <div class="stat-label">Total Artikel</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <div class="stat-number" id="totalAuthorsCount">0</div>
+                    <div class="stat-label">Penulis</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-download"></i>
+                    <div class="stat-number" id="totalDownloadsCount">0</div>
+                    <div class="stat-label">Total Download</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-layer-group"></i>
+                    <div class="stat-number" id="totalCategoriesCount">0</div>
+                    <div class="stat-label">Kategori</div>
+                </div>
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="addArticleBtn">
+                    <i class="fas fa-plus"></i> Tambah Artikel Baru
+                </button>
+                <button class="btn btn-secondary" id="refreshBtn">
+                    <i class="fas fa-sync-alt"></i> Refresh Data
+                </button>
+                <button class="btn btn-warning" id="backupBtn">
+                    <i class="fas fa-database"></i> Buat Backup
+                </button>
+            </div>
+
+            <!-- ARTICLES TABLE -->
+            <div class="articles-table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="50">ID</th>
+                            <th>Judul Artikel</th>
+                            <th>Penulis</th>
+                            <th>Kategori</th>
+                            <th>Download</th>
+                            <th>Tahun</th>
+                            <th width="150">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="articlesTableBody">
+                        <!-- Data akan diisi oleh JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL TAMBAH/EDIT ARTIKEL -->
+    <div class="modal" id="articleModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Tambah Artikel Baru</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="articleForm">
+                    <input type="hidden" id="articleId" value="">
+                    
+                    <div class="form-group">
+                        <label for="articleTitle">Judul Artikel *</label>
+                        <input type="text" id="articleTitle" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="articleAuthor">Penulis *</label>
+                            <input type="text" id="articleAuthor" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="articleYear">Tahun *</label>
+                            <input type="number" id="articleYear" class="form-control" min="2000" max="2030" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="articleCategory">Kategori *</label>
+                            <select id="articleCategory" class="form-control" required>
+                                <option value="">Pilih Kategori</option>
+                                <option value="kategori1">kategori 1</option>
+                                <option value="kategori2">kategori 2</option>
+                                <option value="kategori3">kategori 3</option>
+                                <option value="kategori4">kategori 4</option>
+                                <option value="kategori5">kategori 5</option>
+                                <option value="kategori6">kategori 6</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="articlePages">Jumlah Halaman *</label>
+                            <input type="number" id="articlePages" class="form-control" min="1" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="articleSize">Ukuran File (MB) *</label>
+                            <input type="number" step="0.1" id="articleSize" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="articleIcon">Ikon FontAwesome</label>
+                            <input type="text" id="articleIcon" class="form-control" placeholder="fas fa-book" value="fas fa-book">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="articleDescription">Deskripsi *</label>
+                        <textarea id="articleDescription" class="form-control" rows="3" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="articlePdfUrl">URL PDF (Google Drive) *</label>
+                        <input type="url" id="articlePdfUrl" class="form-control" required>
+                        <small style="color: var(--accent-color); margin-top: 0.5rem; display: block;">
+                            <i class="fas fa-info-circle"></i> Format: https://drive.google.com/file/d/ID_FILE/view
+                        </small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelBtn">Batal</button>
+                <button class="btn btn-primary" id="saveBtn">Simpan Artikel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION CONTAINER -->
+    <div id="notificationContainer"></div>
+
+    <script>
+        // DATA MANAGEMENT
+        let articles = [];
+        let currentEditId = null;
+        const STORAGE_KEY = 'maktabah_umum_articles';
+        
+        // DOM Elements
+        const DOM = {
+            articlesTableBody: document.getElementById('articlesTableBody'),
+            totalArticlesCount: document.getElementById('totalArticlesCount'),
+            totalAuthorsCount: document.getElementById('totalAuthorsCount'),
+            totalDownloadsCount: document.getElementById('totalDownloadsCount'),
+            totalCategoriesCount: document.getElementById('totalCategoriesCount'),
+            addArticleBtn: document.getElementById('addArticleBtn'),
+            refreshBtn: document.getElementById('refreshBtn'),
+            backupBtn: document.getElementById('backupBtn'),
+            exportBtn: document.getElementById('exportBtn'),
+            articleModal: document.getElementById('articleModal'),
+            closeModal: document.getElementById('closeModal'),
+            cancelBtn: document.getElementById('cancelBtn'),
+            saveBtn: document.getElementById('saveBtn'),
+            modalTitle: document.getElementById('modalTitle'),
+            articleForm: document.getElementById('articleForm')
+        };
+
+        // INITIALIZATION
+        document.addEventListener('DOMContentLoaded', () => {
+            loadArticles();
+            setupEventListeners();
+        });
+
+        // LOAD ARTICLES FROM STORAGE
+        function loadArticles() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                try {
+                    articles = JSON.parse(stored);
+                } catch (e) {
+                    console.error('Error parsing articles:', e);
+                    articles = [];
+                }
+            } else {
+                // Load initial data from config if exists
+                const configScript = document.querySelector('#articles-config');
+                if (configScript) {
+                    try {
+                        const config = JSON.parse(configScript.textContent);
+                        articles = config.articles || [];
+                        saveArticles();
+                    } catch (e) {
+                        console.error('Error parsing config:', e);
+                    }
+                }
+            }
+            
+            updateStatistics();
+            renderArticlesTable();
+        }
+
+        // SAVE ARTICLES TO STORAGE
+        function saveArticles() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(articles));
+        }
+
+        // UPDATE STATISTICS
+        function updateStatistics() {
+            const totalArticles = articles.length;
+            const totalAuthors = [...new Set(articles.map(a => a.author))].length;
+            const totalDownloads = articles.reduce((sum, a) => sum + (a.downloadCount || 0), 0);
+            const totalCategories = [...new Set(articles.map(a => a.category))].length;
+            
+            DOM.totalArticlesCount.textContent = totalArticles;
+            DOM.totalAuthorsCount.textContent = totalAuthors;
+            DOM.totalDownloadsCount.textContent = totalDownloads;
+            DOM.totalCategoriesCount.textContent = totalCategories;
+        }
+
+        // RENDER ARTICLES TABLE
+        function renderArticlesTable() {
+            if (!DOM.articlesTableBody) return;
+            
+            DOM.articlesTableBody.innerHTML = '';
+            
+            if (articles.length === 0) {
+                DOM.articlesTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 3rem; color: var(--text-secondary);">
+                            <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                            <p>Belum ada artikel. Klik "Tambah Artikel Baru" untuk memulai.</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            articles.sort((a, b) => b.id - a.id).forEach(article => {
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td>${article.id}</td>
+                    <td class="title-cell" title="${article.title}">
+                        <i class="${article.icon || 'fas fa-file-pdf'}" style="color: var(--accent-color); margin-right: 0.5rem;"></i>
+                        ${article.title}
+                    </td>
+                    <td>${article.author}</td>
+                    <td>
+                        <span class="category-badge" style="
+                            background: rgba(197, 160, 89, 0.1);
+                            color: var(--accent-color);
+                            padding: 0.3rem 0.8rem;
+                            border-radius: 20px;
+                            font-size: 0.85rem;
+                            border: 1px solid rgba(197, 160, 89, 0.3);
+                        ">
+                            ${article.category}
+                        </span>
+                    </td>
+                    <td>${article.downloadCount || 0}</td>
+                    <td>${article.year}</td>
+                    <td class="actions-cell">
+                        <button class="btn btn-sm btn-secondary" onclick="editArticle(${article.id})">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteArticle(${article.id})">
+                            <i class="fas fa-trash"></i> Hapus
+                        </button>
+                    </td>
+                `;
+                
+                DOM.articlesTableBody.appendChild(row);
+            });
+        }
+
+        // SHOW MODAL FOR ADD/EDIT
+        function showArticleModal(article = null) {
+            if (article) {
+                // Edit mode
+                currentEditId = article.id;
+                DOM.modalTitle.textContent = 'Edit Artikel';
+                
+                document.getElementById('articleId').value = article.id;
+                document.getElementById('articleTitle').value = article.title;
+                document.getElementById('articleAuthor').value = article.author;
+                document.getElementById('articleYear').value = article.year;
+                document.getElementById('articleCategory').value = article.category;
+                document.getElementById('articlePages').value = article.pages;
+                document.getElementById('articleSize').value = article.size.replace(' MB', '');
+                document.getElementById('articleIcon').value = article.icon || 'fas fa-book';
+                document.getElementById('articleDescription').value = article.description;
+                document.getElementById('articlePdfUrl').value = article.pdfUrl;
+            } else {
+                // Add mode
+                currentEditId = null;
+                DOM.modalTitle.textContent = 'Tambah Artikel Baru';
+                DOM.articleForm.reset();
+                document.getElementById('articleYear').value = new Date().getFullYear();
+                document.getElementById('articleId').value = '';
+            }
+            
+            DOM.articleModal.classList.add('active');
+        }
+
+        // HIDE MODAL
+        function hideArticleModal() {
+            DOM.articleModal.classList.remove('active');
+            currentEditId = null;
+            DOM.articleForm.reset();
+        }
+
+        // SAVE ARTICLE
+        function saveArticle() {
+            // Validate form
+            if (!DOM.articleForm.checkValidity()) {
+                DOM.articleForm.reportValidity();
+                return;
+            }
+            
+            const articleData = {
+                id: currentEditId || generateNewId(),
+                title: document.getElementById('articleTitle').value,
+                author: document.getElementById('articleAuthor').value,
+                year: parseInt(document.getElementById('articleYear').value),
+                category: document.getElementById('articleCategory').value,
+                pages: parseInt(document.getElementById('articlePages').value),
+                size: document.getElementById('articleSize').value + ' MB',
+                icon: document.getElementById('articleIcon').value || 'fas fa-book',
+                description: document.getElementById('articleDescription').value,
+                pdfUrl: document.getElementById('articlePdfUrl').value,
+                downloadCount: 0
+            };
+            
+            if (currentEditId) {
+                // Update existing article
+                const index = articles.findIndex(a => a.id === currentEditId);
+                if (index !== -1) {
+                    // Preserve download count
+                    articleData.downloadCount = articles[index].downloadCount || 0;
+                    articles[index] = articleData;
+                    showNotification('Artikel berhasil diperbarui!', 'success');
+                }
+            } else {
+                // Add new article
+                articles.push(articleData);
+                showNotification('Artikel berhasil ditambahkan!', 'success');
+            }
+            
+            saveArticles();
+            updateStatistics();
+            renderArticlesTable();
+            hideArticleModal();
+        }
+
+        // EDIT ARTICLE
+        function editArticle(id) {
+            const article = articles.find(a => a.id === id);
+            if (article) {
+                showArticleModal(article);
+            }
+        }
+
+        // DELETE ARTICLE
+        function deleteArticle(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus artikel ini?')) {
+                const index = articles.findIndex(a => a.id === id);
+                if (index !== -1) {
+                    articles.splice(index, 1);
+                    saveArticles();
+                    updateStatistics();
+                    renderArticlesTable();
+                    showNotification('Artikel berhasil dihapus!', 'success');
+                }
+            }
+        }
+
+        // GENERATE NEW ID
+        function generateNewId() {
+            if (articles.length === 0) return 1;
+            return Math.max(...articles.map(a => a.id)) + 1;
+        }
+
+        // CREATE BACKUP
+        function createBackup() {
+            const backupData = {
+                articles: articles,
+                backupDate: new Date().toISOString(),
+                totalArticles: articles.length
+            };
+            
+            const dataStr = JSON.stringify(backupData, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `backup-artikel-umum-${new Date().toISOString().split('T')[0]}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            showNotification('Backup berhasil dibuat!', 'success');
+        }
+
+        // EXPORT DATA (for webiste config)
+        function exportData() {
+            const configData = {
+                articles: articles,
+                categories: {
+                    kategori1: "kategori 1",
+                    kategori2: "kategori 2", 
+                    kategori3: "kategori 3",
+                    kategori4: "kategori 4",
+                    kategori5: "kategori 5",
+                    kategori6: "kategori 6"
+                },
+                website: {
+                    name: "Maktabah Rasyidah",
+                    description: "Perpustakaan digital dengan nuansa klasik yang menyajikan koleksi pengetahuan untuk hidup yang lebih sehat.",
+                    year: new Date().getFullYear()
+                },
+                social: {
+                    facebook: "#",
+                    twitter: "#",
+                    instagram: "#"
+                }
+            };
+            
+            const dataStr = JSON.stringify(configData, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `config-artikel-umum-export.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            // Show instructions
+            setTimeout(() => {
+                if (confirm('Data berhasil diexport! Salin konten JSON dan ganti di file artikel-umum.html pada bagian <script id="articles-config">. Lanjutkan?')) {
+                    showNotification('Salin data JSON ke file artikel-umum.html', 'warning');
+                }
+            }, 500);
+        }
+
+        // SHOW NOTIFICATION
+        function showNotification(message, type = 'info') {
+            const container = document.getElementById('notificationContainer');
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            container.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideInRight 0.3s ease reverse';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // SETUP EVENT LISTENERS
+        function setupEventListeners() {
+            // Modal buttons
+            DOM.addArticleBtn.addEventListener('click', () => showArticleModal());
+            DOM.closeModal.addEventListener('click', hideArticleModal);
+            DOM.cancelBtn.addEventListener('click', hideArticleModal);
+            DOM.saveBtn.addEventListener('click', saveArticle);
+            
+            // Action buttons
+            DOM.refreshBtn.addEventListener('click', () => {
+                loadArticles();
+                showNotification('Data diperbarui!', 'success');
+            });
+            
+            DOM.backupBtn.addEventListener('click', createBackup);
+            DOM.exportBtn.addEventListener('click', exportData);
+            
+            // Close modal on outside click
+            DOM.articleModal.addEventListener('click', (e) => {
+                if (e.target === DOM.articleModal) {
+                    hideArticleModal();
+                }
+            });
+            
+            // Prevent form submission
+            DOM.articleForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                saveArticle();
+            });
+            
+            // Logout button
+            document.querySelector('.logout-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                if (confirm('Apakah Anda yakin ingin logout?')) {
+                    window.location.href = '/';
+                }
+            });
+        }
+
+        // Make functions available globally
+        window.editArticle = editArticle;
+        window.deleteArticle = deleteArticle;
+    </script>
+</body>
+</html>
