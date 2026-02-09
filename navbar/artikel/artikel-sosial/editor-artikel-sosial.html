@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor Admin Artikel Sosial - Maktabah Rasyidah</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Styles untuk Login Screen */
+        .login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(26, 77, 46, 0.95) 0%, 
+                rgba(44, 24, 16, 0.95) 100%),
+                var(--pattern-overlay);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+        }
+        
+        .login-box {
+            background: var(--card-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+        
+        .login-logo {
+            margin-bottom: 1.5rem;
+        }
+        
+        .login-logo .logo-text {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            font-family: 'Cinzel', serif;
+            text-shadow: 1px 1px 0px var(--accent-color);
+        }
+        
+        .login-title {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+        }
+        
+        .login-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+        
+        .login-form .form-group {
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+        
+        .login-form .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .login-input {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            background: var(--bg-paper);
+            color: var(--text-primary);
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .login-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.15);
+        }
+        
+        .login-error {
+            display: none;
+            background: rgba(231, 76, 60, 0.12);
+            color: #c0392b;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .login-error.active {
+            display: block;
+            animation: shake 0.5s ease;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .login-hint {
+            margin-top: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+        
+        .admin-content {
+            display: none;
+        }
+        
+        .admin-content.active {
+            display: block;
+        }
+        
+        /* Modal konfirmasi logout */
+        .logout-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            padding: 1.5rem;
+        }
+        
+        .logout-modal.active {
+            display: flex;
+        }
+        
+        .logout-modal-content {
+            background: var(--card-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logout-modal h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .logout-modal p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .logout-modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        /* Modal konfirmasi delete */
+        .delete-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            padding: 1.5rem;
+        }
+        
+        .delete-modal.active {
+            display: flex;
+        }
+        
+        .delete-modal-content {
+            background: var(--card-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .delete-modal h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .delete-modal p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .delete-modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-box">
+            <div class="login-logo">
+                <div class="logo-text">Editor Admin</div>
+            </div>
+            
+            <h2 class="login-title">Akses Editor Artikel Sosial</h2>
+            <p class="login-subtitle">Masukkan kredensial admin untuk mengelola konten</p>
+            
+            <div class="login-error" id="loginError">
+                <i class="fas fa-exclamation-triangle"></i> Username atau password salah!
+            </div>
+            
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label class="form-label" for="username">
+                        <i class="fas fa-user"></i> Username
+                    </label>
+                    <input class="login-input" id="username" type="text" 
+                           placeholder="Masukkan username admin" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="password">
+                        <i class="fas fa-lock"></i> Password
+                    </label>
+                    <input class="login-input" id="password" type="password" 
+                           placeholder="Masukkan password" required>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-sign-in-alt"></i> Masuk ke Editor
+                    </button>
+                </div>
+                
+                <div class="login-hint">
+                    <i class="fas fa-info-circle"></i> Hubungi administrator untuk mendapatkan akses
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Content (Tersembunyi sampai login berhasil) -->
+    <div class="admin-content" id="adminContent">
+        <div id="navbar-container"></div>
+
+        <header class="health-header admin-header">
+            <div class="breadcrumb">
+                <div class="breadcrumb-links">
+                    <a href="/" class="breadcrumb-link">Beranda</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <a href="artikel-sosial.html" class="breadcrumb-link">Artikel Sosial</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span class="breadcrumb-current">Editor Admin</span>
+                </div>
+            </div>
+
+            <h1 class="page-title">Editor Admin Artikel Sosial</h1>
+            <p class="page-subtitle">Kelola postingan artikel sosial dengan cepat. Tambah, edit, atau hapus artikel tanpa mengubah tema dan fitur utama. Perubahan otomatis tersimpan di browser Anda.</p>
+
+            <div class="health-stats admin-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="statTotalArticles">0</div>
+                    <div class="stat-label">Total Artikel</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statTotalAuthors">0</div>
+                    <div class="stat-label">Total Penulis</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statTotalPages">0</div>
+                    <div class="stat-label">Total Halaman</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statLastSaved">-</div>
+                    <div class="stat-label">Status Simpan</div>
+                </div>
+            </div>
+        </header>
+
+        <main class="admin-container">
+            <section class="admin-toolbar">
+                <div class="toolbar-info">
+                    <h2 class="toolbar-title">Kelola Konten</h2>
+                    <p class="toolbar-subtitle" id="toolbarSubtitle">Gunakan form di kiri untuk menambah atau mengedit artikel.</p>
+                </div>
+                <div class="toolbar-actions">
+                    <a href="artikel-sosial.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Kembali</a>
+                    <button class="btn btn-primary" id="btnNewArticle"><i class="fas fa-plus"></i> Artikel Baru</button>
+                    <button class="btn btn-outline" id="btnExportJson"><i class="fas fa-file-export"></i> Export JSON</button>
+                    <button class="btn btn-ghost" id="btnLogout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
+            </section>
+
+            <section class="admin-grid">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h3 class="section-title">Form Artikel Sosial</h3>
+                        <span class="admin-pill" id="formMode">Mode Tambah</span>
+                    </div>
+
+                    <form id="articleForm" class="admin-form">
+                        <input type="hidden" id="articleId">
+
+                        <div class="form-group">
+                            <label class="form-label" for="articleTitle">Judul Artikel</label>
+                            <input class="admin-input" id="articleTitle" type="text" placeholder="Contoh: Dinamika Komunikasi Sosial" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="articleAuthor">Penulis</label>
+                                <input class="admin-input" id="articleAuthor" type="text" placeholder="Nama penulis" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="articleYear">Tahun</label>
+                                <input class="admin-input" id="articleYear" type="number" min="1990" max="2100" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="articleCategory">Kategori</label>
+                                <select class="admin-select" id="articleCategory" required>
+                                    <option value="">Pilih kategori</option>
+                                    <option value="psikologi-sosial">Psikologi Sosial</option>
+                                    <option value="komunikasi">Komunikasi</option>
+                                    <option value="kebudayaan">Kebudayaan</option>
+                                    <option value="masyarakat">Masyarakat</option>
+                                    <option value="etika-sosial">Etika Sosial</option>
+                                    <option value="perubahan-sosial">Perubahan Sosial</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="articlePages">Jumlah Halaman</label>
+                                <input class="admin-input" id="articlePages" type="number" min="1" placeholder="32" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="articleDescription">Deskripsi Singkat</label>
+                            <textarea class="admin-textarea" id="articleDescription" rows="4" placeholder="Ringkasan artikel..." required></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="articleSize">Ukuran File (opsional)</label>
+                                <input class="admin-input" id="articleSize" type="text" placeholder="Contoh: 4.7 MB">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="articleIcon">Icon (Font Awesome)</label>
+                                <input class="admin-input" id="articleIcon" type="text" placeholder="fas fa-comments" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="articlePdfUrl">URL PDF (Google Drive)</label>
+                            <input class="admin-input" id="articlePdfUrl" type="url" placeholder="https://drive.google.com/..." required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Pilih Icon Cepat</label>
+                            <div class="icon-picker" id="iconPicker">
+                                <button type="button" class="icon-option" data-icon="fas fa-comments"><i class="fas fa-comments"></i></button>
+                                <button type="button" class="icon-option" data-icon="fas fa-users"><i class="fas fa-users"></i></button>
+                                <button type="button" class="icon-option" data-icon="fas fa-handshake"><i class="fas fa-handshake"></i></button>
+                                <button type="button" class="icon-option" data-icon="fas fa-globe"><i class="fas fa-globe"></i></button>
+                                <button type="button" class="icon-option" data-icon="fas fa-heart"><i class="fas fa-heart"></i></button>
+                                <button type="button" class="icon-option" data-icon="fas fa-balance-scale"><i class="fas fa-balance-scale"></i></button>
+                                <button type="button" class="icon-option" data-icon="fas fa-brain"><i class="fas fa-brain"></i></button>
+                                <button type="button" class="icon-option" data-icon="fas fa-book-reader"><i class="fas fa-book-reader"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary" id="btnSave"><i class="fas fa-save"></i> Simpan</button>
+                            <button type="button" class="btn btn-ghost" id="btnCancel"><i class="fas fa-times"></i> Batal</button>
+                        </div>
+
+                        <div class="admin-message" id="formMessage"></div>
+                    </form>
+                </div>
+
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h3 class="section-title">Daftar Artikel Sosial</h3>
+                        <div class="admin-filter">
+                            <input class="admin-input" id="searchInput" type="text" placeholder="Cari judul, penulis, kategori...">
+                            <select class="admin-select" id="filterCategory">
+                                <option value="all">Semua Kategori</option>
+                                <option value="psikologi-sosial">Psikologi Sosial</option>
+                                <option value="komunikasi">Komunikasi</option>
+                                <option value="kebudayaan">Kebudayaan</option>
+                                <option value="masyarakat">Masyarakat</option>
+                                <option value="etika-sosial">Etika Sosial</option>
+                                <option value="perubahan-sosial">Perubahan Sosial</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="admin-list" id="articlesList"></div>
+                    <div class="admin-empty" id="emptyState">Belum ada artikel. Tambahkan artikel pertama Anda.</div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Modal untuk Logout -->
+        <div class="logout-modal" id="logoutModal">
+            <div class="logout-modal-content">
+                <h3>Konfirmasi Logout</h3>
+                <p>Apakah Anda yakin ingin logout dari editor admin?</p>
+                <div class="logout-modal-actions">
+                    <button class="btn btn-ghost" id="btnCancelLogout">Batal</button>
+                    <button class="btn btn-danger" id="btnConfirmLogout">Ya, Logout</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal untuk Delete Artikel -->
+        <div class="delete-modal" id="deleteModal">
+            <div class="delete-modal-content">
+                <h3>Konfirmasi Hapus Artikel</h3>
+                <p id="deleteMessage">Apakah Anda yakin ingin menghapus artikel ini?</p>
+                <div class="delete-modal-actions">
+                    <button class="btn btn-ghost" id="btnCancelDelete">Batal</button>
+                    <button class="btn btn-danger" id="btnConfirmDelete">Ya, Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==============================================
+        // SISTEM AUTHENTIKASI
+        // ==============================================
+        const AUTH_KEY = 'maktabah_sosial_admin_auth';
+        const SESSION_TIMEOUT = 60 * 60 * 1000; // 1 jam dalam milliseconds
+        
+        // Kredensial admin (bisa diubah sesuai kebutuhan)
+        const ADMIN_CREDENTIALS = {
+            username: "admin",
+            password: "admin" // Ganti dengan password yang lebih kuat
+        };
+        
+        // DOM untuk login
+        const loginDOM = {
+            loginScreen: document.getElementById('loginScreen'),
+            adminContent: document.getElementById('adminContent'),
+            loginForm: document.getElementById('loginForm'),
+            username: document.getElementById('username'),
+            password: document.getElementById('password'),
+            loginError: document.getElementById('loginError'),
+            btnLogout: document.getElementById('btnLogout'),
+            logoutModal: document.getElementById('logoutModal'),
+            btnCancelLogout: document.getElementById('btnCancelLogout'),
+            btnConfirmLogout: document.getElementById('btnConfirmLogout')
+        };
+        
+        // Cek apakah sudah login
+        function checkAuthStatus() {
+            const authData = JSON.parse(localStorage.getItem(AUTH_KEY) || 'null');
+            
+            if (authData && authData.loggedIn) {
+                // Cek session timeout
+                const now = Date.now();
+                if (now - authData.loginTime < SESSION_TIMEOUT) {
+                    return true; // Masih dalam session
+                } else {
+                    // Session expired
+                    localStorage.removeItem(AUTH_KEY);
+                    return false;
+                }
+            }
+            return false;
+        }
+        
+        // Handle login
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const username = loginDOM.username.value.trim();
+            const password = loginDOM.password.value.trim();
+            
+            // Validasi kredensial
+            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+                // Login berhasil
+                const authData = {
+                    loggedIn: true,
+                    loginTime: Date.now(),
+                    username: username
+                };
+                
+                localStorage.setItem(AUTH_KEY, JSON.stringify(authData));
+                
+                // Tampilkan konten admin
+                loginDOM.loginScreen.style.display = 'none';
+                loginDOM.adminContent.classList.add('active');
+                
+                // Inisialisasi editor
+                setTimeout(() => {
+                    if (window.initEditor) {
+                        window.initEditor();
+                    }
+                }, 100);
+                
+            } else {
+                // Login gagal
+                loginDOM.loginError.classList.add('active');
+                loginDOM.password.value = '';
+                
+                // Reset error setelah 3 detik
+                setTimeout(() => {
+                    loginDOM.loginError.classList.remove('active');
+                }, 3000);
+            }
+        }
+        
+        // Setup event listeners untuk auth
+        function setupAuthListeners() {
+            loginDOM.loginForm.addEventListener('submit', handleLogin);
+            
+            // Auto focus pada username field
+            if (loginDOM.username) {
+                setTimeout(() => {
+                    loginDOM.username.focus();
+                }, 300);
+            }
+            
+            // Enter key untuk submit form
+            loginDOM.password.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') {
+                    loginDOM.loginForm.dispatchEvent(new Event('submit'));
+                }
+            });
+        }
+        
+        // Cek status auth saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            if (checkAuthStatus()) {
+                // Sudah login, langsung tampilkan konten admin
+                loginDOM.loginScreen.style.display = 'none';
+                loginDOM.adminContent.classList.add('active');
+                
+                // Tunggu sebentar baru inisialisasi editor
+                setTimeout(() => {
+                    if (window.initEditor) {
+                        window.initEditor();
+                    }
+                }, 100);
+            } else {
+                // Belum login, tampilkan form login
+                setupAuthListeners();
+            }
+        });
+        
+        // ==============================================
+        // EDITOR ADMIN ARTIKEL SOSIAL
+        // ==============================================
+        
+        // Fungsi untuk inisialisasi editor (dipanggil setelah login berhasil)
+        window.initEditor = function() {
+            const ARTICLES_STORAGE_KEY = 'maktabah_sosial_articles_admin';
+            const CONFIG_STORAGE_KEY = 'maktabah_sosial_config';
+
+            const CATEGORY_LABELS = {
+                'psikologi-sosial': 'Psikologi Sosial',
+                'komunikasi': 'Komunikasi',
+                'kebudayaan': 'Kebudayaan',
+                'masyarakat': 'Masyarakat',
+                'etika-sosial': 'Etika Sosial',
+                'perubahan-sosial': 'Perubahan Sosial'
+            };
+
+            const SITE_META = {
+                name: 'Maktabah Rasyidah',
+                description: 'Perpustakaan digital dengan nuansa klasik yang menyajikan koleksi pengetahuan untuk hidup yang lebih sehat.',
+                year: 2026
+            };
+
+            const DOM = {
+                navbarContainer: document.getElementById('navbar-container'),
+                form: document.getElementById('articleForm'),
+                formMode: document.getElementById('formMode'),
+                formMessage: document.getElementById('formMessage'),
+                articleId: document.getElementById('articleId'),
+                articleTitle: document.getElementById('articleTitle'),
+                articleAuthor: document.getElementById('articleAuthor'),
+                articleYear: document.getElementById('articleYear'),
+                articleCategory: document.getElementById('articleCategory'),
+                articleDescription: document.getElementById('articleDescription'),
+                articlePages: document.getElementById('articlePages'),
+                articleSize: document.getElementById('articleSize'),
+                articleIcon: document.getElementById('articleIcon'),
+                articlePdfUrl: document.getElementById('articlePdfUrl'),
+                iconPicker: document.getElementById('iconPicker'),
+                btnNewArticle: document.getElementById('btnNewArticle'),
+                btnCancel: document.getElementById('btnCancel'),
+                btnExportJson: document.getElementById('btnExportJson'),
+                btnLogout: document.getElementById('btnLogout'),
+                searchInput: document.getElementById('searchInput'),
+                filterCategory: document.getElementById('filterCategory'),
+                articlesList: document.getElementById('articlesList'),
+                emptyState: document.getElementById('emptyState'),
+                statTotalArticles: document.getElementById('statTotalArticles'),
+                statTotalAuthors: document.getElementById('statTotalAuthors'),
+                statTotalPages: document.getElementById('statTotalPages'),
+                statLastSaved: document.getElementById('statLastSaved'),
+                toolbarSubtitle: document.getElementById('toolbarSubtitle'),
+                logoutModal: document.getElementById('logoutModal'),
+                btnCancelLogout: document.getElementById('btnCancelLogout'),
+                btnConfirmLogout: document.getElementById('btnConfirmLogout'),
+                deleteModal: document.getElementById('deleteModal'),
+                deleteMessage: document.getElementById('deleteMessage'),
+                btnCancelDelete: document.getElementById('btnCancelDelete'),
+                btnConfirmDelete: document.getElementById('btnConfirmDelete')
+            };
+
+            let articlesData = [];
+            let deleteTargetId = null;
+
+            function safeParseJSON(value, fallback) {
+                if (!value) return fallback;
+                try {
+                    return JSON.parse(value);
+                } catch (e) {
+                    return fallback;
+                }
+            }
+
+            async function init() {
+                DOM.articleYear.value = new Date().getFullYear();
+                await loadNavbar();
+                await loadInitialArticles();
+                setupEventListeners();
+                renderArticles();
+                updateStats();
+                
+                // Setup event listeners untuk logout (SETELAH semua terinisialisasi)
+                setupLogoutListeners();
+            }
+
+            async function loadNavbar() {
+                try {
+                    const response = await fetch('/navbar/navbar.html');
+                    if (response.ok) {
+                        const html = await response.text();
+                        DOM.navbarContainer.innerHTML = html;
+                        return;
+                    }
+                } catch (e) {
+                    // ignore and fallback
+                }
+
+                DOM.navbarContainer.innerHTML = `
+                    <nav class="navbar-module" style="position:fixed; top:0; width:100%; background:rgba(253, 251, 247, 0.95); backdrop-filter:blur(12px); border-bottom:1px solid rgba(197, 160, 89, 0.3); z-index:1000; padding:0 1rem;">
+                        <div class="nav-container-module" style="max-width:1400px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; height:70px;">
+                            <a href="/" class="logo-module" style="text-decoration:none;">
+                                <div class="logo-text-module">
+                                    <span class="logo-main-module" style="font-family:'Cinzel',serif; font-size:1.8rem; color:#1a4d2e;">Maktabah</span>
+                                    <span class="logo-sub-module" style="font-size:0.8rem; color:#c5a059; letter-spacing:3px;">Rasyidah</span>
+                                </div>
+                            </a>
+                            <div class="nav-links" style="display:flex; gap:1rem;">
+                                <a href="artikel-sosial.html" class="nav-link" style="color:#1a4d2e; text-decoration:none; font-weight:500;">
+                                    <i class="fas fa-arrow-left"></i> Kembali ke Artikel
+                                </a>
+                            </div>
+                        </div>
+                    </nav>
+                `;
+            }
+
+            async function loadInitialArticles() {
+                const stored = safeParseJSON(localStorage.getItem(ARTICLES_STORAGE_KEY), null);
+                if (Array.isArray(stored)) {
+                    articlesData = stored;
+                    return;
+                }
+
+                const storedConfig = safeParseJSON(localStorage.getItem(CONFIG_STORAGE_KEY), null);
+                if (storedConfig && Array.isArray(storedConfig.articles)) {
+                    articlesData = storedConfig.articles;
+                    return;
+                }
+
+                // Data default
+                articlesData = [
+                    {
+                        "id": 1,
+                        "title": "Dinamika Komunikasi dalam Masyarakat Digital",
+                        "author": "Dr. Ahmad Surya",
+                        "year": 2025,
+                        "category": "komunikasi",
+                        "description": "Analisis mendalam tentang perubahan pola komunikasi di era digital dan dampaknya terhadap hubungan sosial.",
+                        "pages": 45,
+                        "size": "6.2 MB",
+                        "icon": "fas fa-comments",
+                        "pdfUrl": "https://drive.google.com/file/d/1sampel-view?usp=sharing",
+                        "downloadCount": 0
+                    },
+                    {
+                        "id": 2,
+                        "title": "Psikologi Konformitas Sosial",
+                        "author": "Prof. Maya Dewi",
+                        "year": 2024,
+                        "category": "psikologi-sosial",
+                        "description": "Studi tentang pengaruh kelompok terhadap perilaku individu dalam berbagai konteks sosial.",
+                        "pages": 32,
+                        "size": "4.5 MB",
+                        "icon": "fas fa-users",
+                        "pdfUrl": "https://drive.google.com/file/d/1sampel-view?usp=sharing",
+                        "downloadCount": 0
+                    }
+                ];
+                persistData();
+            }
+
+            function setupEventListeners() {
+                DOM.form.addEventListener('submit', handleSubmit);
+                DOM.btnNewArticle.addEventListener('click', handleNewArticle);
+                DOM.btnCancel.addEventListener('click', resetForm);
+                DOM.btnExportJson.addEventListener('click', handleExportJson);
+                DOM.searchInput.addEventListener('input', renderArticles);
+                DOM.filterCategory.addEventListener('change', renderArticles);
+                DOM.articlesList.addEventListener('click', handleListClick);
+                DOM.iconPicker.addEventListener('click', handleIconPick);
+                
+                // Event listeners untuk delete modal
+                DOM.btnCancelDelete.addEventListener('click', closeDeleteModal);
+                DOM.deleteModal.addEventListener('click', function(e) {
+                    if (e.target === DOM.deleteModal) {
+                        closeDeleteModal();
+                    }
+                });
+            }
+            
+            // SETUP LOGOUT LISTENERS YANG TERPISAH
+            function setupLogoutListeners() {
+                console.log('Setting up logout listeners...');
+                
+                // Tombol logout di toolbar
+                DOM.btnLogout.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Logout button clicked');
+                    DOM.logoutModal.classList.add('active');
+                });
+                
+                // Tombol cancel di modal logout
+                DOM.btnCancelLogout.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Cancel logout clicked');
+                    DOM.logoutModal.classList.remove('active');
+                });
+                
+                // Tombol confirm logout
+                DOM.btnConfirmLogout.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Confirm logout clicked');
+                    
+                    // Hapus data auth dari localStorage
+                    localStorage.removeItem(AUTH_KEY);
+                    
+                    // Redirect ke halaman login (reload)
+                    console.log('Logout successful, reloading page...');
+                    location.reload();
+                });
+                
+                // Close modal ketika klik di luar
+                DOM.logoutModal.addEventListener('click', function(e) {
+                    if (e.target === DOM.logoutModal) {
+                        DOM.logoutModal.classList.remove('active');
+                    }
+                });
+                
+                console.log('Logout listeners setup complete');
+            }
+
+            function handleIconPick(event) {
+                const button = event.target.closest('.icon-option');
+                if (!button) return;
+
+                const icon = button.dataset.icon;
+                DOM.articleIcon.value = icon;
+
+                document.querySelectorAll('.icon-option').forEach(option => {
+                    option.classList.toggle('selected', option.dataset.icon === icon);
+                });
+            }
+
+            function handleNewArticle() {
+                resetForm();
+                DOM.form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            function handleExportJson() {
+                const payload = {
+                    articles: articlesData,
+                    categories: CATEGORY_LABELS,
+                    website: SITE_META
+                };
+                const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'artikel-sosial-config.json';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+                
+                showMessage('File JSON berhasil diexport.', 'success');
+            }
+
+            function handleSubmit(event) {
+                event.preventDefault();
+
+                const validation = validateForm();
+                if (!validation.valid) {
+                    showMessage(validation.message, 'error');
+                    return;
+                }
+
+                const payload = getFormPayload();
+                const existingId = DOM.articleId.value ? parseInt(DOM.articleId.value, 10) : null;
+
+                if (existingId) {
+                    const index = articlesData.findIndex(article => article.id === existingId);
+                    if (index !== -1) {
+                        payload.id = existingId;
+                        payload.downloadCount = articlesData[index].downloadCount || 0;
+                        articlesData[index] = payload;
+                        showMessage('Artikel berhasil diperbarui.', 'success');
+                    }
+                } else {
+                    payload.id = generateNewId();
+                    payload.downloadCount = 0;
+                    articlesData.unshift(payload);
+                    showMessage('Artikel baru berhasil ditambahkan.', 'success');
+                }
+
+                persistData();
+                renderArticles();
+                updateStats();
+                resetForm();
+            }
+
+            function validateForm() {
+                if (!DOM.articleTitle.value.trim()) return { valid: false, message: 'Judul artikel wajib diisi.' };
+                if (!DOM.articleAuthor.value.trim()) return { valid: false, message: 'Nama penulis wajib diisi.' };
+                if (!DOM.articleYear.value.trim()) return { valid: false, message: 'Tahun wajib diisi.' };
+                if (!DOM.articleCategory.value.trim()) return { valid: false, message: 'Kategori wajib dipilih.' };
+                if (!DOM.articleDescription.value.trim()) return { valid: false, message: 'Deskripsi wajib diisi.' };
+                if (!DOM.articlePages.value.trim()) return { valid: false, message: 'Jumlah halaman wajib diisi.' };
+                if (!DOM.articleIcon.value.trim()) return { valid: false, message: 'Icon wajib diisi.' };
+                if (!DOM.articlePdfUrl.value.trim()) return { valid: false, message: 'URL PDF wajib diisi.' };
+
+                if (!DOM.articlePdfUrl.value.includes('drive.google.com')) {
+                    return { valid: false, message: 'URL PDF harus berupa link Google Drive.' };
+                }
+
+                return { valid: true };
+            }
+
+            function getFormPayload() {
+                return {
+                    title: DOM.articleTitle.value.trim(),
+                    author: DOM.articleAuthor.value.trim(),
+                    year: parseInt(DOM.articleYear.value, 10),
+                    category: DOM.articleCategory.value.trim(),
+                    description: DOM.articleDescription.value.trim(),
+                    pages: parseInt(DOM.articlePages.value, 10),
+                    size: DOM.articleSize.value.trim() || '0 MB',
+                    icon: DOM.articleIcon.value.trim(),
+                    pdfUrl: DOM.articlePdfUrl.value.trim()
+                };
+            }
+
+            function generateNewId() {
+                if (articlesData.length === 0) return 1;
+                const maxId = Math.max(...articlesData.map(article => article.id || 0));
+                return maxId + 1;
+            }
+
+            function renderArticles() {
+                const searchTerm = DOM.searchInput.value.trim().toLowerCase();
+                const categoryFilter = DOM.filterCategory.value;
+
+                const filtered = articlesData.filter(article => {
+                    const matchesSearch = !searchTerm ||
+                        article.title.toLowerCase().includes(searchTerm) ||
+                        article.author.toLowerCase().includes(searchTerm) ||
+                        article.description.toLowerCase().includes(searchTerm) ||
+                        article.category.toLowerCase().includes(searchTerm);
+
+                    const matchesCategory = categoryFilter === 'all' || article.category === categoryFilter;
+                    return matchesSearch && matchesCategory;
+                });
+
+                if (filtered.length === 0) {
+                    DOM.articlesList.innerHTML = '';
+                    DOM.emptyState.style.display = 'block';
+                    DOM.emptyState.textContent = articlesData.length === 0
+                        ? 'Belum ada artikel. Tambahkan artikel pertama Anda.'
+                        : 'Tidak ada artikel yang sesuai dengan filter.';
+                    return;
+                }
+
+                DOM.emptyState.style.display = 'none';
+
+                DOM.articlesList.innerHTML = filtered.map(article => {
+                    const iconClass = article.icon || 'fas fa-book';
+                    return `
+                        <article class="admin-item" data-id="${article.id}">
+                            <div class="admin-item-header">
+                                <div class="admin-item-title">
+                                    <span class="admin-item-icon"><i class="${iconClass}"></i></span>
+                                    <div>
+                                        <h4>${article.title}</h4>
+                                        <p>${article.author} • ${article.year}</p>
+                                    </div>
+                                </div>
+                                <span class="admin-badge">${CATEGORY_LABELS[article.category] || article.category}</span>
+                            </div>
+                            <p class="admin-item-description">${article.description}</p>
+                            <div class="admin-item-meta">
+                                <span><i class="fas fa-file-alt"></i> ${article.pages} halaman</span>
+                                <span><i class="fas fa-download"></i> ${article.downloadCount || 0} download</span>
+                                <span><i class="fas fa-link"></i> ${article.pdfUrl.includes('drive.google.com') ? 'Google Drive' : 'Link PDF'}</span>
+                            </div>
+                            <div class="admin-item-actions">
+                                <button class="btn btn-outline btn-small btn-edit" data-id="${article.id}">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                <button class="btn btn-danger btn-small btn-delete" data-id="${article.id}">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </button>
+                            </div>
+                        </article>
+                    `;
+                });
+                
+                // Tambahkan event listeners untuk tombol edit/delete
+                document.querySelectorAll('.btn-edit').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const articleId = parseInt(this.dataset.id);
+                        populateForm(articleId);
+                    });
+                });
+                
+                document.querySelectorAll('.btn-delete').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const articleId = parseInt(this.dataset.id);
+                        showDeleteConfirmation(articleId);
+                    });
+                });
+            }
+            
+            function handleListClick(event) {
+                // Backup handler untuk klik langsung pada article list
+                if (event.target.closest('.btn-edit') || event.target.closest('.btn-delete')) {
+                    return; // Sudah ditangani oleh event listeners di atas
+                }
+            }
+
+            function showDeleteConfirmation(articleId) {
+                const article = articlesData.find(item => item.id === articleId);
+                if (!article) return;
+                
+                deleteTargetId = articleId;
+                DOM.deleteMessage.textContent = `Apakah Anda yakin ingin menghapus artikel "${article.title}"?`;
+                DOM.deleteModal.classList.add('active');
+                
+                // Setup event listener untuk tombol confirm delete
+                DOM.btnConfirmDelete.onclick = function() {
+                    if (deleteTargetId) {
+                        articlesData = articlesData.filter(article => article.id !== deleteTargetId);
+                        persistData();
+                        renderArticles();
+                        updateStats();
+                        closeDeleteModal();
+                        showMessage('Artikel berhasil dihapus.', 'success');
+                    }
+                };
+            }
+
+            function closeDeleteModal() {
+                DOM.deleteModal.classList.remove('active');
+                deleteTargetId = null;
+                DOM.btnConfirmDelete.onclick = null; // Reset event listener
+            }
+
+            function populateForm(articleId) {
+                const article = articlesData.find(item => item.id === articleId);
+                if (!article) return;
+
+                DOM.articleId.value = article.id;
+                DOM.articleTitle.value = article.title;
+                DOM.articleAuthor.value = article.author;
+                DOM.articleYear.value = article.year;
+                DOM.articleCategory.value = article.category;
+                DOM.articleDescription.value = article.description;
+                DOM.articlePages.value = article.pages;
+                DOM.articleSize.value = article.size || '';
+                DOM.articleIcon.value = article.icon || '';
+                DOM.articlePdfUrl.value = article.pdfUrl;
+
+                DOM.formMode.textContent = 'Mode Edit';
+                DOM.toolbarSubtitle.textContent = 'Anda sedang mengedit artikel. Simpan untuk memperbarui.';
+
+                document.querySelectorAll('.icon-option').forEach(option => {
+                    option.classList.toggle('selected', option.dataset.icon === article.icon);
+                });
+
+                DOM.form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            function resetForm() {
+                DOM.form.reset();
+                DOM.articleId.value = '';
+                DOM.articleYear.value = new Date().getFullYear();
+                DOM.formMode.textContent = 'Mode Tambah';
+                DOM.toolbarSubtitle.textContent = 'Gunakan form di kiri untuk menambah atau mengedit artikel.';
+                DOM.formMessage.style.display = 'none';
+
+                document.querySelectorAll('.icon-option').forEach(option => option.classList.remove('selected'));
+            }
+
+            function persistData() {
+                try {
+                    localStorage.setItem(ARTICLES_STORAGE_KEY, JSON.stringify(articlesData));
+                    localStorage.setItem(CONFIG_STORAGE_KEY, JSON.stringify({
+                        articles: articlesData,
+                        categories: CATEGORY_LABELS,
+                        website: SITE_META
+                    }));
+                    DOM.statLastSaved.textContent = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+                } catch (e) {
+                    showMessage('Gagal menyimpan data. Periksa penyimpanan browser.', 'error');
+                }
+            }
+
+            function updateStats() {
+                DOM.statTotalArticles.textContent = articlesData.length;
+
+                const authors = new Set(articlesData.map(article => article.author));
+                DOM.statTotalAuthors.textContent = authors.size;
+
+                const totalPages = articlesData.reduce((sum, article) => sum + (article.pages || 0), 0);
+                DOM.statTotalPages.textContent = totalPages;
+            }
+
+            function showMessage(message, type) {
+                DOM.formMessage.textContent = message;
+                DOM.formMessage.classList.remove('success', 'error');
+                DOM.formMessage.classList.add(type);
+                DOM.formMessage.style.display = 'block';
+                
+                // Sembunyikan pesan setelah 3 detik
+                setTimeout(() => {
+                    DOM.formMessage.style.display = 'none';
+                }, 3000);
+            }
+
+            // Jalankan inisialisasi editor
+            init();
+        };
+    </script>
+</body>
+</html>
